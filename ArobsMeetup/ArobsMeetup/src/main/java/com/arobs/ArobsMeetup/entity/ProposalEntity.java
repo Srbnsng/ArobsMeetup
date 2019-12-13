@@ -12,12 +12,12 @@ public class Proposal {
     private Type type;
     private Difficulty difficulty;
     private String language;
-    private int duration;
+    private double duration;
     private int max_attends;
-    private int votes;
+    //private int votes;
 
 
-    public Proposal(int id, String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+    public Proposal(int id, String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, double duration, int max_attends) {
         this.id = id;
         this.title = title;
         this.proposer_id = proposer_id;
@@ -27,7 +27,19 @@ public class Proposal {
         this.language = language;
         this.duration = duration;
         this.max_attends = max_attends;
-        this.votes = 0;
+        //this.votes = votes;
+    }
+
+    public Proposal(String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, double duration, int max_attends) {
+        this.title = title;
+        this.proposer_id = proposer_id;
+        this.description = description;
+        this.type = type;
+        this.difficulty = difficulty;
+        this.language = language;
+        this.duration = duration;
+        this.max_attends = max_attends;
+        //this.votes = 0;
     }
 
     public int getId() {
@@ -58,7 +70,7 @@ public class Proposal {
         return language;
     }
 
-    public int getDuration() {
+    public double getDuration() {
         return duration;
     }
 
@@ -66,13 +78,13 @@ public class Proposal {
         return max_attends;
     }
 
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
+//    public int getVotes() {
+//        return votes;
+//    }
+//
+//    public void setVotes(int votes) {
+//        this.votes = votes;
+//    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -94,7 +106,7 @@ public class Proposal {
         this.language = language;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 

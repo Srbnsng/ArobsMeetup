@@ -15,7 +15,7 @@ public class Event {
     private Type type;
     private Difficulty difficulty;
     private String language;
-    private int duration;
+    private double duration;
     private int max_attends;
     private LocalDate date;
     private LocalTime time;
@@ -82,11 +82,11 @@ public class Event {
         this.language = language;
     }
 
-    public int getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 

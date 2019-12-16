@@ -2,13 +2,23 @@ package com.arobs.ArobsMeetup.entity;
 
 import com.arobs.ArobsMeetup.service.dto.enums.Role;
 
-public class UserEntity {
+import javax.persistence.*;
 
+@Entity
+@Table(name="`User`")
+public class UserEntity {
+    @Id @GeneratedValue
+    @Column(name="id")
     private int id;
+    @Column(name = "passwrd")
     private String password;
+    @Column(name = "full_name")
     private String full_name;
+    @Column(name = "urole")
     private Role role;
+    @Column(name = "email")
     private String email;
+    @Column(name = "points")
     private int points;
 
 

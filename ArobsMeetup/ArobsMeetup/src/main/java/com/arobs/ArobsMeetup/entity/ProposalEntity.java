@@ -1,15 +1,28 @@
 package com.arobs.ArobsMeetup.entity;
 
-public class ProposalEntity {
+import javax.persistence.*;
 
+@Entity
+@Table(name="Proposal")
+public class ProposalEntity {
+    @Id @GeneratedValue
+    @Column(name="id")
     private int id;
+    @Column(name="title")
     private String title;
+    @Column(name="proposer_id")
     private int proposer_id;
+    @Column(name="description")
     private String description;
+    @Column(name="ptype")
     private String type;
+    @Column(name="difficulty")
     private String difficulty;
+    @Column(name="planguage")
     private String language;
+    @Column(name="duration")
     private int duration;
+    @Column(name = "max_attends")
     private int max_attends;
     //private int votes;
 

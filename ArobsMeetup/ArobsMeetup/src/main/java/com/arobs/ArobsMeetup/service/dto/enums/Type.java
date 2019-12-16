@@ -1,4 +1,4 @@
-package com.arobs.ArobsMeetup.entity.enums;
+package com.arobs.ArobsMeetup.service.dto.enums;
 
 public enum Type {
 

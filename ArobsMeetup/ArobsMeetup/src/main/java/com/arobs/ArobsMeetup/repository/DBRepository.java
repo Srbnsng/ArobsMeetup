@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public interface IDBRepository<T> {
+public interface DBRepository<T> {
 
     int add(T elem) throws SQLException;
     int update(T elem) throws SQLException;

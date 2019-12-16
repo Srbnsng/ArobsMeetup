@@ -1,8 +1,8 @@
-package com.arobs.ArobsMeetup.domain;
+package com.arobs.ArobsMeetup.entity;
 
-import com.arobs.ArobsMeetup.domain.enums.Role;
+import com.arobs.ArobsMeetup.service.dto.enums.Role;
 
-public class User {
+public class UserEntity {
 
     private int id;
     private String password;
@@ -12,7 +12,7 @@ public class User {
     private int points;
 
 
-    public User(int id, String password, String full_name, Role role, String email) {
+    public UserEntity(int id, String password, String full_name, Role role, String email) {
         this.id = id;
         this.password = password;
         this.full_name = full_name;
@@ -21,7 +21,7 @@ public class User {
         this.points = 0;
     }
 
-    public User(int id, String password, String full_name, Role role, String email, int points) {
+    public UserEntity(int id, String password, String full_name, Role role, String email, int points) {
         this.id = id;
         this.password = password;
         this.full_name = full_name;

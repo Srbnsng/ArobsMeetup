@@ -1,19 +1,16 @@
-package com.arobs.ArobsMeetup.domain;
-
-import com.arobs.ArobsMeetup.domain.enums.Difficulty;
-import com.arobs.ArobsMeetup.domain.enums.Type;
+package com.arobs.ArobsMeetup.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Event {
+public class EventEntity {
 
     private int id;
     private String title;
     private int proposer_id;
     private String description;
-    private Type type;
-    private Difficulty difficulty;
+    private String type;
+    private String difficulty;
     private String language;
     private double duration;
     private int max_attends;
@@ -22,17 +19,17 @@ public class Event {
     private String room_name;
 
 
-    public Event(int id, Proposal proposal, LocalDate date, LocalTime time, String room_name) {
+    public EventEntity(int id, ProposalEntity proposalEntity, LocalDate date, LocalTime time, String room_name) {
 
         this.id = id;
-        this.title = proposal.getTitle();
-        this.proposer_id = proposal.getProposer_id();
-        this.description = proposal.getDescription();
-        this.type = proposal.getType();
-        this.difficulty = proposal.getDifficulty();
-        this.language = proposal.getLanguage();
-        this.duration = proposal.getDuration();
-        this.max_attends = proposal.getMax_attends();
+        this.title = proposalEntity.getTitle();
+        this.proposer_id = proposalEntity.getProposer_id();
+        this.description = proposalEntity.getDescription();
+        this.type = proposalEntity.getType();
+        this.difficulty = proposalEntity.getDifficulty();
+        this.language = proposalEntity.getLanguage();
+        this.duration = proposalEntity.getDuration();
+        this.max_attends = proposalEntity.getMax_attends();
         this.date = date;
         this.time = time;
         this.room_name = room_name;
@@ -58,19 +55,19 @@ public class Event {
         this.description = description;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Difficulty getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 

@@ -1,6 +1,6 @@
-package com.arobs.ArobsMeetup.domain;
+package com.arobs.ArobsMeetup.entity;
 
-public class Vote {
+public class VoteEntity {
 
     private int proposal_id;
     private int user_id;
@@ -21,7 +21,7 @@ public class Vote {
         this.user_id = user_id;
     }
 
-    public Vote(int proposal_id, int user_id) {
+    public VoteEntity(int proposal_id, int user_id) {
         this.proposal_id = proposal_id;
         this.user_id = user_id;
     }

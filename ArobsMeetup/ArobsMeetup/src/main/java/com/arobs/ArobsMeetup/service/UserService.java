@@ -1,17 +1,18 @@
 package com.arobs.ArobsMeetup.service;
 
-import com.arobs.ArobsMeetup.domain.Proposal;
-import com.arobs.ArobsMeetup.domain.enums.Difficulty;
-import com.arobs.ArobsMeetup.domain.enums.Type;
+import com.arobs.ArobsMeetup.entity.ProposalEntity;
+import com.arobs.ArobsMeetup.service.dto.ProposalDTO;
+import com.arobs.ArobsMeetup.service.dto.VoteDTO;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 
 @Service
-public interface IUserService {
+public interface UserService {
 
-    Proposal createProposal (String title, int proposer_id, String desc, Type type,
-                                   Difficulty diff, String lang, double duration, int maxattends) throws SQLException;
+    boolean createProposal (ProposalDTO proposalDTO) throws SQLException;
 
-    void voteToggle(int proposal_id,int user_id) throws SQLException;
+    void voteToggle(VoteDTO voteDTO) throws SQLException;
+
+    void acceptProposal(ProposalDTO proposalDTO);
 }

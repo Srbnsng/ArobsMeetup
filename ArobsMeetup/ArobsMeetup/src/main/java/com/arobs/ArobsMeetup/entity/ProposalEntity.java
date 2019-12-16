@@ -1,23 +1,20 @@
-package com.arobs.ArobsMeetup.domain;
+package com.arobs.ArobsMeetup.entity;
 
-import com.arobs.ArobsMeetup.domain.enums.Difficulty;
-import com.arobs.ArobsMeetup.domain.enums.Type;
-
-public class Proposal {
+public class ProposalEntity {
 
     private int id;
     private String title;
     private int proposer_id;
     private String description;
-    private Type type;
-    private Difficulty difficulty;
+    private String type;
+    private String difficulty;
     private String language;
-    private double duration;
+    private int duration;
     private int max_attends;
     //private int votes;
 
 
-    public Proposal(int id, String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, double duration, int max_attends) {
+    public ProposalEntity(int id, String title, int proposer_id, String description, String type, String difficulty, String language, int duration, int max_attends) {
         this.id = id;
         this.title = title;
         this.proposer_id = proposer_id;
@@ -30,7 +27,7 @@ public class Proposal {
         //this.votes = votes;
     }
 
-    public Proposal(String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, double duration, int max_attends) {
+    public ProposalEntity(String title, int proposer_id, String description, String type, String difficulty, String language,int duration, int max_attends) {
         this.title = title;
         this.proposer_id = proposer_id;
         this.description = description;
@@ -58,11 +55,11 @@ public class Proposal {
         return description;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public Difficulty getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
@@ -70,7 +67,7 @@ public class Proposal {
         return language;
     }
 
-    public double getDuration() {
+    public int getDuration() {
         return duration;
     }
 
@@ -94,11 +91,11 @@ public class Proposal {
         this.description = description;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -106,7 +103,7 @@ public class Proposal {
         this.language = language;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

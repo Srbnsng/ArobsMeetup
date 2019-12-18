@@ -1,36 +1,55 @@
 package com.arobs.ArobsMeetup.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.List;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
-@Table(name="Proposal")
+@Table(name="proposal")
 public class ProposalEntity {
     @Id @GeneratedValue
-    @Column(name="id")
+    @Column(name="id")@NonNull
     private int id;
-    @Column(name="title")
+
+    @Column(name="title" , length = 30)@NonNull
     private String title;
-    @Column(name="proposer_id")
-    private int proposer_id;
-    @Column(name="description")
+
+    @ManyToOne(fetch = FetchType.LAZY) @NonNull
+    @JoinColumn(name = "proposer_id" , referencedColumnName = "id")
+    private UserEntity proposer;
+
+    @Column(name="description" , length = 100)@NonNull
     private String description;
-    @Column(name="ptype")
+
+    @Column(name="ptype" , length = 30)@NonNull
     private String type;
-    @Column(name="difficulty")
+
+    @Column(name="difficulty")@NonNull
     private String difficulty;
-    @Column(name="planguage")
+
+    @Column(name="planguage" , length = 30)@NonNull
     private String language;
-    @Column(name="duration")
+
+    @Column(name="duration") @NonNull @Min(0)
     private int duration;
-    @Column(name = "max_attends")
+
+    @Column(name = "max_attends") @NonNull @Min(0)
     private int max_attends;
-    //private int votes;
+
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "proposal")
+    List<VoteEntity> votes = new ArrayList<>();
 
 
-    public ProposalEntity(int id, String title, int proposer_id, String description, String type, String difficulty, String language, int duration, int max_attends) {
+    public ProposalEntity(int id, String title, UserEntity proposer, String description, String type, String difficulty, String language, int duration, int max_attends) {
         this.id = id;
         this.title = title;
-        this.proposer_id = proposer_id;
+        this.proposer = proposer;
         this.description = description;
         this.type = type;
         this.difficulty = difficulty;
@@ -40,9 +59,9 @@ public class ProposalEntity {
         //this.votes = votes;
     }
 
-    public ProposalEntity(String title, int proposer_id, String description, String type, String difficulty, String language,int duration, int max_attends) {
+    public ProposalEntity(String title, UserEntity proposer, String description, String type, String difficulty, String language,int duration, int max_attends) {
         this.title = title;
-        this.proposer_id = proposer_id;
+        this.proposer = proposer;
         this.description = description;
         this.type = type;
         this.difficulty = difficulty;
@@ -50,77 +69,5 @@ public class ProposalEntity {
         this.duration = duration;
         this.max_attends = max_attends;
         //this.votes = 0;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getProposer_id() {
-        return proposer_id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public int getMax_attends() {
-        return max_attends;
-    }
-
-//    public int getVotes() {
-//        return votes;
-//    }
-//
-//    public void setVotes(int votes) {
-//        this.votes = votes;
-//    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public void setMax_attends(int max_attends) {
-        this.max_attends = max_attends;
     }
 }

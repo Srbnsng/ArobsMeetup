@@ -1,28 +1,28 @@
 package com.arobs.ArobsMeetup.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+import javax.persistence.*;
+
+@Data
+@RequiredArgsConstructor
+@NoArgsConstructor
+
+@Entity(name = "VoteEntity")
+@Table(name = "vote")
 public class VoteEntity {
 
-    private int proposal_id;
-    private int user_id;
+    @Id @GeneratedValue
+    @Column(name = "id")
+    private int id;
+    @ManyToOne(fetch = FetchType.LAZY) @NonNull
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
+    private UserEntity user;
+    @ManyToOne(fetch = FetchType.LAZY) @NonNull
+    @JoinColumn(name = "id_proposal" , referencedColumnName = "id")
+    private ProposalEntity proposal;
 
-    public int getProposal_id() {
-        return proposal_id;
-    }
-
-    public void setProposal_id(int proposal_id) {
-        this.proposal_id = proposal_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public VoteEntity(int proposal_id, int user_id) {
-        this.proposal_id = proposal_id;
-        this.user_id = user_id;
-    }
 }

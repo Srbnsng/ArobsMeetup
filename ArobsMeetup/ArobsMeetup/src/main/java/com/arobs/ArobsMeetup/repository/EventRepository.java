@@ -1,35 +1,67 @@
 package com.arobs.ArobsMeetup.repository;
 
 import com.arobs.ArobsMeetup.entity.EventEntity;
-import org.springframework.stereotype.Component;
+import com.arobs.ArobsMeetup.entity.UserEntity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
-@Component
+@Repository
 public class EventRepository implements IRepository<EventEntity> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventRepository.class);
+
+    @Autowired
+    SessionFactory sessionFactory;
+
     @Override
-    public int add(EventEntity elem) {
-        return 0;
+    public void add(EventEntity elem) {
+
+        LOGGER.info("  ==> EventRepository = add() ");
+        Session session = sessionFactory.getCurrentSession();
+        session.save(elem);
     }
 
     @Override
-    public int update(EventEntity elem) {
-        return 0;
+    public void update(int id,EventEntity elem){
+        LOGGER.info("  ==> EventRepository = update() ");
+        Session session = sessionFactory.getCurrentSession();
+        session.update(elem);
     }
 
     @Override
-    public int remove(EventEntity elem) {
-        return 0;
+    public void remove(EventEntity elem) {
+        LOGGER.info("  ==> EventRepository = remove() ");
+        Session session = sessionFactory.getCurrentSession();
+        session.remove(elem);
     }
 
     @Override
     public EventEntity find(int id)  {
-        return null;
+        LOGGER.info("  ==> EventRepository = find() ");
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(EventEntity.class,id);
     }
 
     @Override
     public List<EventEntity> findAll() {
-        return null;
+        LOGGER.info("  ==> EventRepository = findAll() ");
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<EventEntity> criteriaQuery = criteriaBuilder.createQuery(EventEntity.class);
+        Root<EventEntity> root = criteriaQuery.from(EventEntity.class);
+        criteriaQuery.select(root);
+        Query<EventEntity> query = session.createQuery(criteriaQuery);
+
+        return query.getResultList();
     }
 }

@@ -1,37 +1,75 @@
 package com.arobs.ArobsMeetup.repository;
 
 import com.arobs.ArobsMeetup.entity.UserEntity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.SQLException;
 import java.util.List;
 
 @Repository
 public class UserRepository implements IRepository<UserEntity>{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserRepository.class);
+
+    @Autowired
+    SessionFactory sessionFactory;
 
     @Override
-    public int add(UserEntity elem) {
-        return 0;
+    public void add(UserEntity elem) {
+
+        LOGGER.info("  ==> UserRepository = add() ");
+        Session session = sessionFactory.getCurrentSession();
+        session.save(elem);
     }
 
     @Override
-    public int update(UserEntity elem) {
-        return 0;
+    public void update(int id, UserEntity elem) {
+
+        LOGGER.info("  ==> UserRepository = update() ");
+        UserEntity thisUser = find(id);
+        thisUser.setPassword(elem.getPassword());
+        thisUser.setFull_name(elem.getFull_name());
+        thisUser.setRole(elem.getRole());
+        thisUser.setEmail(elem.getEmail());
+        thisUser.setPoints(elem.getPoints());
+        Session session = sessionFactory.getCurrentSession();
+        session.update(thisUser);
+
     }
 
     @Override
-    public int remove(UserEntity elem) {
-        return 0;
+    public void remove(UserEntity elem) {
+        LOGGER.info("  ==> UserRepository = remove() ");
+        Session session = sessionFactory.getCurrentSession();
+        session.remove(elem);
     }
 
     @Override
     public UserEntity find(int id) {
-        return null;
+        LOGGER.info("  ==> UserRepository = find() ");
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(UserEntity.class , id);
     }
 
     @Override
     public List<UserEntity> findAll() {
-        return null;
+        LOGGER.info("  ==> UserRepositoryHibernate = findAll() ");
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);
+        Root<UserEntity> root = criteriaQuery.from(UserEntity.class);
+        criteriaQuery.select(root);
+        Query<UserEntity> query = session.createQuery(criteriaQuery);
+
+        return query.getResultList();
     }
 }

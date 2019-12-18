@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface IRepository<T> {
 
-    int add(T elem);
-    int update(T elem) ;
-    int remove(T elem) ;
+    void add(T elem);
+    void update(int id,T elem) ;
+    void remove(T elem) ;
     T find(int id) ;
     List<T> findAll() ;
 }

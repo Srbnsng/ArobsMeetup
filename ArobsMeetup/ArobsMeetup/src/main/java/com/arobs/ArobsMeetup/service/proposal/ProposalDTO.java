@@ -1,7 +1,8 @@
-package com.arobs.ArobsMeetup.service.dto;
+package com.arobs.ArobsMeetup.service.proposal;
 
 import com.arobs.ArobsMeetup.service.dto.enums.Difficulty;
 import com.arobs.ArobsMeetup.service.dto.enums.Type;
+
 
 public class ProposalDTO {
 
@@ -15,8 +16,8 @@ public class ProposalDTO {
     private int duration;
     private int max_attends;
 
-
-    public ProposalDTO(String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+    public ProposalDTO(int id, String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+        this.id = id;
         this.title = title;
         this.proposer_id = proposer_id;
         this.description = description;
@@ -27,6 +28,8 @@ public class ProposalDTO {
         this.max_attends = max_attends;
     }
 
+    public ProposalDTO() {
+    }
 
     public int getId() {
         return id;

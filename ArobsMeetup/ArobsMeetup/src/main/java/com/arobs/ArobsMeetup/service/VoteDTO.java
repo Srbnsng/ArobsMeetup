@@ -1,4 +1,4 @@
-package com.arobs.ArobsMeetup.service.dto;
+package com.arobs.ArobsMeetup.service;
 
 public class VoteDTO {
 

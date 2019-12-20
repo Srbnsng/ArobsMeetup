@@ -40,7 +40,7 @@ public class ProposalEntity {
     private int max_attends;
 
     @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "proposal")
-    List<VoteEntity> votes = new ArrayList<>();
+    private List<VoteEntity> votes = new ArrayList<>();
 
 
     public ProposalEntity(int id, String title, UserEntity proposer, String description, String type, String difficulty, String language, int duration, int max_attends) {

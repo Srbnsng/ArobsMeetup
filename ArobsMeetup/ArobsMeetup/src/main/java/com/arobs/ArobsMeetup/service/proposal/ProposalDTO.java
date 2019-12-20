@@ -27,6 +27,16 @@ public class ProposalDTO {
         this.duration = duration;
         this.max_attends = max_attends;
     }
+    public ProposalDTO(String title, int proposer_id, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+        this.title = title;
+        this.proposer_id = proposer_id;
+        this.description = description;
+        this.type = type;
+        this.difficulty = difficulty;
+        this.language = language;
+        this.duration = duration;
+        this.max_attends = max_attends;
+    }
 
     public ProposalDTO() {
     }

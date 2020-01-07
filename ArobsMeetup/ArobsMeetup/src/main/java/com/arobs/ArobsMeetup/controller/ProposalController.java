@@ -21,7 +21,7 @@ public class ProposalController {
     }
 
     @GetMapping(path = "/")
-    public ResponseEntity<List<ProposalDTO>> findAllUsers() {
+    public ResponseEntity<List<ProposalDTO>> findAllProposals() {
         return ResponseEntity.ok(proposalService.findAllProposals());
     }
 

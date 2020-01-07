@@ -1,15 +1,22 @@
 package com.arobs.ArobsMeetup.service.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDTO {
 
+    private int id;
     private String password;
     private String full_name;
     private String role;
     private String email;
     private int points;
 
-    public UserDTO(String password,String full_name,String role,String email,int points){
+    public UserDTO(int id, String password, String full_name, String role, String email, int points){
 
+        this.id = id;
         this.password = password;
         this.full_name = full_name;
         this.role = role;
@@ -18,6 +25,14 @@ public class UserDTO {
     }
 
     public UserDTO() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {

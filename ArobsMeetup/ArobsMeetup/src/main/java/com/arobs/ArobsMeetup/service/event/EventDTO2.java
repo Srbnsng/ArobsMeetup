@@ -1,38 +1,62 @@
-package com.arobs.ArobsMeetup.service.proposal;
+package com.arobs.ArobsMeetup.service.event;
 
 import com.arobs.ArobsMeetup.entity.UserEntity;
-import com.arobs.ArobsMeetup.service.dto.enums.Difficulty;
-import com.arobs.ArobsMeetup.service.dto.enums.Type;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @JsonSerialize
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProposalDTO {
+public class EventDTO2 {
 
+    private int id;
+    private UserEntity proposer_id;
     private String title;
-    private UserEntity proposer;
     private String description;
-    private Type type;
-    private Difficulty difficulty;
+    private String type;
+    private String difficulty;
     private String language;
     private int duration;
     private int max_attends;
+    private Date event_date;
+    private String room_name;
 
-    public ProposalDTO(UserEntity proposer, String title, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+    public EventDTO2(int id, UserEntity proposer_id, String title, String description, String type, String difficulty, String language, int duration, int max_attends, Date event_date, String room_name) {
+        this.id = id;
+        this.proposer_id = proposer_id;
         this.title = title;
-        this.proposer = proposer;
         this.description = description;
         this.type = type;
         this.difficulty = difficulty;
         this.language = language;
         this.duration = duration;
         this.max_attends = max_attends;
+        this.event_date = event_date;
+        this.room_name = room_name;
     }
 
+    public EventDTO2() {
+    }
 
-    public ProposalDTO() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public UserEntity getProposer_id() {
+        return proposer_id;
+    }
+
+    public void setProposer_id(UserEntity proposer_id) {
+        this.proposer_id = proposer_id;
     }
 
     public String getTitle() {
@@ -51,19 +75,19 @@ public class ProposalDTO {
         this.description = description;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Difficulty getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -91,11 +115,20 @@ public class ProposalDTO {
         this.max_attends = max_attends;
     }
 
-    public UserEntity getProposer() {
-        return proposer;
+    public String getRoom_name() {
+        return room_name;
     }
 
-    public void setProposer(UserEntity proposer) {
-        this.proposer = proposer;
+    public void setRoom_name(String room_name) {
+        this.room_name = room_name;
     }
+
+    public Date getEvent_date() {
+        return event_date;
+    }
+
+    public void setEvent_date(Date event_date) {
+        this.event_date = event_date;
+    }
+
 }

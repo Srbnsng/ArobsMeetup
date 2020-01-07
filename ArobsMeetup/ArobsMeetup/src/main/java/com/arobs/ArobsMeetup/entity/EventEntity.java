@@ -1,12 +1,10 @@
 package com.arobs.ArobsMeetup.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +40,8 @@ public class EventEntity {
     @Column(name = "max_attends")
     private int max_attends;
 
-    @Column(name = "date_time")
-    private Timestamp date_time;
+    @Column(name = "event_date")
+    private Date event_date;
 
     @Column(name = "room_name" , length = 30)
     private String room_name;
@@ -51,9 +49,8 @@ public class EventEntity {
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true, mappedBy = "event")
     List<AttendanceEntity> attendances = new ArrayList<>();
 
-    public EventEntity(int id, ProposalEntity proposalEntity,Timestamp date_time, String room_name) {
+    public EventEntity(ProposalEntity proposalEntity,Date event_date, String room_name) {
 
-        this.id = id;
         this.title = proposalEntity.getTitle();
         this.proposer_id = proposalEntity.getProposer();
         this.description = proposalEntity.getDescription();
@@ -62,7 +59,7 @@ public class EventEntity {
         this.language = proposalEntity.getLanguage();
         this.duration = proposalEntity.getDuration();
         this.max_attends = proposalEntity.getMax_attends();
-        this.date_time = date_time;
+        this.event_date = event_date;
         this.room_name = room_name;
     }
 
@@ -142,14 +139,6 @@ public class EventEntity {
         this.max_attends = max_attends;
     }
 
-    public Timestamp getDate_time() {
-        return date_time;
-    }
-
-    public void setDate_time(Timestamp date_time) {
-        this.date_time = date_time;
-    }
-
     public String getRoom_name() {
         return room_name;
     }
@@ -165,4 +154,13 @@ public class EventEntity {
     public void setAttendances(List<AttendanceEntity> attendances) {
         this.attendances = attendances;
     }
+
+    public Date getEvent_date() {
+        return event_date;
+    }
+
+    public void setEvent_date(Date event_date) {
+        this.event_date = event_date;
+    }
+
 }

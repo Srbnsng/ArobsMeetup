@@ -26,7 +26,6 @@ public class ProposalServiceImpl implements ProposalService {
     public void alterProposal(int id, ProposalDTO proposalDTO) {
         proposalObject.alterProposal(id,proposalDTO);
     }
-
     @Override @Transactional
     public ProposalDTO findProposal(int id) {
         return proposalObject.findProposal(id);

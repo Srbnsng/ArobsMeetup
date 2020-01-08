@@ -31,7 +31,6 @@ public class ProposalDTO {
         this.max_attends = max_attends;
     }
 
-
     public ProposalDTO() {
     }
 

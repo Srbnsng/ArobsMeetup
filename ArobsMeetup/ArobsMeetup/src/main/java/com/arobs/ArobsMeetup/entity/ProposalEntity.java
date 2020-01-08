@@ -1,16 +1,16 @@
 package com.arobs.ArobsMeetup.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="proposal")
 public class ProposalEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
@@ -39,22 +39,10 @@ public class ProposalEntity {
     @Column(name = "max_attends")
     private int max_attends;
 
-    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "proposal")
-    private List<VoteEntity> votes = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "votedProposals")
+    private Set<UserEntity> userVotes = new HashSet<>();
 
-
-    public ProposalEntity(int id, String title, UserEntity proposer, String description, String type, String difficulty, String language, int duration, int max_attends) {
-        this.id = id;
-        this.title = title;
-        this.proposer = proposer;
-        this.description = description;
-        this.type = type;
-        this.difficulty = difficulty;
-        this.language = language;
-        this.duration = duration;
-        this.max_attends = max_attends;
-        //this.votes = votes;
-    }
 
     public ProposalEntity(String title, UserEntity proposer, String description, String type, String difficulty, String language,int duration, int max_attends) {
         this.title = title;
@@ -65,7 +53,6 @@ public class ProposalEntity {
         this.language = language;
         this.duration = duration;
         this.max_attends = max_attends;
-        //this.votes = 0;
     }
 
     public ProposalEntity() {
@@ -144,11 +131,11 @@ public class ProposalEntity {
         this.max_attends = max_attends;
     }
 
-    public List<VoteEntity> getVotes() {
-        return votes;
+    public Set<UserEntity> getUserVotes() {
+        return userVotes;
     }
 
-    public void setVotes(List<VoteEntity> votes) {
-        this.votes = votes;
+    public void setUserVotes(Set<UserEntity> userVotes) {
+        this.userVotes = userVotes;
     }
 }

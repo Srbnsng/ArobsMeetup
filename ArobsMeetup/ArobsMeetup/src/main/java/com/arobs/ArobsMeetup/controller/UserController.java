@@ -24,6 +24,12 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> findAllUsers() {
         return ResponseEntity.ok(userService.findAllUsers());
     }
+
+    @PostMapping(path = "/addUser")
+    public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO){
+        userService.addUser(userDTO);
+        return ResponseEntity.ok("User created! ");
+    }
 }
 
 

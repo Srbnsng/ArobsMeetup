@@ -61,7 +61,7 @@ public class UserRepository implements IRepository<UserEntity>{
 
     @Override
     public List<UserEntity> findAll() {
-        LOGGER.info("  ==> UserRepositoryHibernate = findAll() ");
+        LOGGER.info("  ==> UserRepository = findAll() ");
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);

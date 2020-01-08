@@ -14,7 +14,6 @@
         <mapping class="com.arobs.ArobsMeetup.entity.UserEntity" />
         <mapping class="com.arobs.ArobsMeetup.entity.ProposalEntity" />
         <mapping class="com.arobs.ArobsMeetup.entity.EventEntity" />
-        <mapping class="com.arobs.ArobsMeetup.entity.VoteEntity" />
         <mapping class="com.arobs.ArobsMeetup.entity.PrizeEntity" />
         <mapping class="com.arobs.ArobsMeetup.entity.AchievementHistoryEntity" />
         <mapping class="com.arobs.ArobsMeetup.entity.AttendanceEntity" />

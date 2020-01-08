@@ -26,9 +26,9 @@ public class ProposalController {
     }
 
     @PostMapping(path = "/create")
-    public String createProposal(@RequestBody ProposalDTO proposalDTO){
+    public ResponseEntity<String> createProposal(@RequestBody ProposalDTO proposalDTO){
         proposalService.createProposal(proposalDTO);
-        return "HTTP Create method called!";
+        return ResponseEntity.ok("Proposal created! ");
     }
 
     @DeleteMapping(path ="/{id}")

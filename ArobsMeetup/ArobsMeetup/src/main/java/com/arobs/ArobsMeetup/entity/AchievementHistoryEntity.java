@@ -1,18 +1,14 @@
 package com.arobs.ArobsMeetup.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
-
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity( name = "AchievementHistoryEntity")
 @Table(name = "achievementhistory")
 public class AchievementHistoryEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -24,12 +20,12 @@ public class AchievementHistoryEntity {
     private PrizeEntity prize;
 
     @Column(name = "points")
-    int points;
+    private int points;
 
     @Column(name = "date_time")
-    Timestamp date_time;
+    private Date date_time;
 
-    public AchievementHistoryEntity(UserEntity user, PrizeEntity prize, int points, Timestamp date_time) {
+    public AchievementHistoryEntity(UserEntity user, PrizeEntity prize, int points, Date date_time) {
         this.user = user;
         this.prize = prize;
         this.points = points;
@@ -72,11 +68,11 @@ public class AchievementHistoryEntity {
         this.points = points;
     }
 
-    public Timestamp getDate_time() {
+    public Date getDate_time() {
         return date_time;
     }
 
-    public void setDate_time(Timestamp date_time) {
+    public void setDate_time(Date date_time) {
         this.date_time = date_time;
     }
 }

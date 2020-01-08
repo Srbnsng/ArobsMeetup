@@ -1,15 +1,17 @@
 package com.arobs.ArobsMeetup.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity(name = "PrizeEntity")
 @Table(name = "prize")
 public class PrizeEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "pdescription")
@@ -17,8 +19,9 @@ public class PrizeEntity {
     @Column(name = "pvalue")
     private int values;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true , mappedBy = "prize")
-    private List<AchievementHistoryEntity> achievementsHistories = new ArrayList<>();
+    private Set<AchievementHistoryEntity> achievementsHistories = new HashSet<>();
 
     public int getId() {
         return id;
@@ -44,11 +47,11 @@ public class PrizeEntity {
         this.values = values;
     }
 
-    public List<AchievementHistoryEntity> getAchievementsHistories() {
+    public Set<AchievementHistoryEntity> getAchievementsHistories() {
         return achievementsHistories;
     }
 
-    public void setAchievementsHistories(List<AchievementHistoryEntity> achievementsHistories) {
+    public void setAchievementsHistories(Set<AchievementHistoryEntity> achievementsHistories) {
         this.achievementsHistories = achievementsHistories;
     }
 }

@@ -1,8 +1,5 @@
 package com.arobs.ArobsMeetup.repository;
-
-import com.arobs.ArobsMeetup.configuration.Datasource;
 import com.arobs.ArobsMeetup.entity.ProposalEntity;
-import com.arobs.ArobsMeetup.entity.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -15,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class ProposalRepository implements IRepository<ProposalEntity> {
@@ -53,6 +51,7 @@ public class ProposalRepository implements IRepository<ProposalEntity> {
         return session.get(ProposalEntity.class,id);
     }
 
+
     @Override
     public List<ProposalEntity> findAll()  {
         LOGGER.info("  ==> ProposalRepository = findAll() ");
@@ -65,4 +64,5 @@ public class ProposalRepository implements IRepository<ProposalEntity> {
 
         return query.getResultList();
     }
+
 }

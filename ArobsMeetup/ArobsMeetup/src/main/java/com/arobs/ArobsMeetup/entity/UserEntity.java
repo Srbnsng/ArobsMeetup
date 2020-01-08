@@ -1,7 +1,9 @@
 package com.arobs.ArobsMeetup.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "UserEntity")
 @Table(name = "user")
@@ -26,14 +28,28 @@ public class UserEntity{
     @Column(name = "points")
     private int points;
 
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(
+            name = "vote",
+            joinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_proposal", referencedColumnName = "id")}
+    )
+    @JsonIgnore
+    private Set<ProposalEntity> votedProposals = new HashSet<>();
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "proposer")
-    private List<ProposalEntity> proposals = new ArrayList<>();
+    private Set<ProposalEntity> proposalsCreated = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true ,mappedBy = "user")
-    private List<VoteEntity> votes = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy = "user")
-    private List<AttendanceEntity> attendances = new ArrayList<>();
+    private Set<AttendanceEntity> eventsAttended = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,mappedBy = "proposer")
+    private Set<EventEntity> eventsCreated = new HashSet<>();
+
+
 
 
 
@@ -96,5 +112,37 @@ public class UserEntity{
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public Set<ProposalEntity> getVotedProposals() {
+        return votedProposals;
+    }
+
+    public void setVotedProposals(Set<ProposalEntity> votedProposals) {
+        this.votedProposals = votedProposals;
+    }
+
+    public Set<ProposalEntity> getProposalsCreated() {
+        return proposalsCreated;
+    }
+
+    public void setProposalsCreated(Set<ProposalEntity> proposalsCreated) {
+        this.proposalsCreated = proposalsCreated;
+    }
+
+    public Set<AttendanceEntity> getEventsAttended() {
+        return eventsAttended;
+    }
+
+    public void setEventsAttended(Set<AttendanceEntity> eventsAttended) {
+        this.eventsAttended = eventsAttended;
+    }
+
+    public Set<EventEntity> getEventsCreated() {
+        return eventsCreated;
+    }
+
+    public void setEventsCreated(Set<EventEntity> eventsCreated) {
+        this.eventsCreated = eventsCreated;
     }
 }

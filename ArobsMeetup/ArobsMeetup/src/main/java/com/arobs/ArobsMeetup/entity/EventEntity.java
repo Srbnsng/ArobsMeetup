@@ -1,23 +1,22 @@
 package com.arobs.ArobsMeetup.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="EventEntity")
 @Table(name="event")
 public class EventEntity {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_event")
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_proposer",referencedColumnName = "id")
-    private UserEntity proposer_id;
+    private UserEntity proposer;
 
     @Column(name="title" , length = 30)
     private String title;
@@ -46,13 +45,14 @@ public class EventEntity {
     @Column(name = "room_name" , length = 30)
     private String room_name;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true, mappedBy = "event")
-    List<AttendanceEntity> attendances = new ArrayList<>();
+    private Set<AttendanceEntity> attendees = new HashSet<>();
 
     public EventEntity(ProposalEntity proposalEntity,Date event_date, String room_name) {
 
         this.title = proposalEntity.getTitle();
-        this.proposer_id = proposalEntity.getProposer();
+        this.proposer = proposalEntity.getProposer();
         this.description = proposalEntity.getDescription();
         this.type = proposalEntity.getType();
         this.difficulty = proposalEntity.getDifficulty();
@@ -76,11 +76,11 @@ public class EventEntity {
     }
 
     public UserEntity getProposer_id() {
-        return proposer_id;
+        return proposer;
     }
 
     public void setProposer_id(UserEntity proposer_id) {
-        this.proposer_id = proposer_id;
+        this.proposer = proposer_id;
     }
 
     public String getTitle() {
@@ -147,14 +147,6 @@ public class EventEntity {
         this.room_name = room_name;
     }
 
-    public List<AttendanceEntity> getAttendances() {
-        return attendances;
-    }
-
-    public void setAttendances(List<AttendanceEntity> attendances) {
-        this.attendances = attendances;
-    }
-
     public Date getEvent_date() {
         return event_date;
     }
@@ -163,4 +155,19 @@ public class EventEntity {
         this.event_date = event_date;
     }
 
+    public UserEntity getProposer() {
+        return proposer;
+    }
+
+    public void setProposer(UserEntity proposer) {
+        this.proposer = proposer;
+    }
+
+    public Set<AttendanceEntity> getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(Set<AttendanceEntity> attendees) {
+        this.attendees = attendees;
+    }
 }

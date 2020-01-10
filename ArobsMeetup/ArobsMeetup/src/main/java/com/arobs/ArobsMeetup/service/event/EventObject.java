@@ -29,7 +29,7 @@ public class EventObject {
             proposal_repo.remove(proposalEntity);
         }
         else{
-            //validare taraneasca
+            // This will be not here but for the moment is just as an example
             System.out.println("Proposal not found!");
         }
     }
@@ -40,6 +40,10 @@ public class EventObject {
         EventEntity eventEntity = (EventEntity)repository.find(id);
         if(eventEntity!=null)
             return eventMapper.map(eventEntity,EventDTO2.class);
+        else{
+            // This will be not here but for the moment is just as an example of error
+            System.out.println("Event not found!");
+        }
 
         return null;
     }
@@ -49,6 +53,10 @@ public class EventObject {
         List<EventEntity> events = repository.findAll();
         if(events !=null)
             return eventMapper.mapAsList(events,EventDTO2.class);
+        else{
+            // This will be not here but for the moment is just as an example of error
+            System.out.println("No events !");
+        }
 
         return null;
     }
@@ -56,22 +64,34 @@ public class EventObject {
     public void removeEvent(int id){
         IRepository repository = factory.createRepository(RepositoryConstants.EVENT_REPOSITORY_TYPE);
         EventEntity eventEntity = (EventEntity)repository.find(id);
-        repository.remove(eventEntity);
+        if(eventEntity != null)
+            repository.remove(eventEntity);
+        else{
+            // This will be not here but for the moment is just as an example of error
+            System.out.println("Event not found!");
+        }
     }
 
     public void alterEvent(int id,EventDTO2 eventDTO){
         IRepository repository = factory.createRepository(RepositoryConstants.EVENT_REPOSITORY_TYPE);
         EventEntity eventEntity = (EventEntity)repository.find(id);
-        eventEntity.setTitle(eventDTO.getTitle());
-        eventEntity.setDescription(eventDTO.getDescription());
-        eventEntity.setDifficulty(eventDTO.getDifficulty());
-        eventEntity.setDuration(eventDTO.getDuration());
-        eventEntity.setEvent_date(eventDTO.getEvent_date());
-        eventEntity.setLanguage(eventDTO.getLanguage());
-        eventEntity.setMax_attends(eventDTO.getMax_attends());
-        eventEntity.setProposer(eventDTO.getProposer());
-        eventEntity.setRoom_name(eventDTO.getRoom_name());
-        eventEntity.setType(eventDTO.getType());
-        repository.update(eventEntity);
+        if(eventEntity != null ){
+            eventEntity.setTitle(eventDTO.getTitle());
+            eventEntity.setDescription(eventDTO.getDescription());
+            eventEntity.setDifficulty(eventDTO.getDifficulty());
+            eventEntity.setDuration(eventDTO.getDuration());
+            eventEntity.setEvent_date(eventDTO.getEvent_date());
+            eventEntity.setLanguage(eventDTO.getLanguage());
+            eventEntity.setMax_attends(eventDTO.getMax_attends());
+            eventEntity.setProposer(eventDTO.getProposer());
+            eventEntity.setRoom_name(eventDTO.getRoom_name());
+            eventEntity.setType(eventDTO.getType());
+            repository.update(eventEntity);
+        }
+        else{
+            // This will be not here but for the moment is just as an example of error
+            System.out.println("Event not found!");
+        }
+
     }
 }

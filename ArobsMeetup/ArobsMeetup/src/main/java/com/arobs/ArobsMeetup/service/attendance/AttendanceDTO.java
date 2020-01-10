@@ -1,48 +1,24 @@
-package com.arobs.ArobsMeetup.entity;
+package com.arobs.ArobsMeetup.service.attendance;
 
+import com.arobs.ArobsMeetup.entity.EventEntity;
+import com.arobs.ArobsMeetup.entity.UserEntity;
 
-import javax.persistence.*;
+public class AttendanceDTO {
 
-@Entity(name = "AttendanceEntity")
-@Table(name= "attendance")
-public class AttendanceEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_event", referencedColumnName = "id_event")
     private EventEntity event;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", referencedColumnName = "id")
     private UserEntity user;
-
-    @Column(name = "mark")
     private int mark;
-
-    @Column(name = "note" , length = 50)
     private String note;
 
-    public AttendanceEntity(EventEntity event, UserEntity user) {
+
+    public AttendanceDTO(EventEntity event, UserEntity user) {
         this.event = event;
         this.user = user;
         this.mark = 0;
         this.note = "";
     }
 
-    public AttendanceEntity() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public AttendanceDTO() {
     }
 
     public EventEntity getEvent() {

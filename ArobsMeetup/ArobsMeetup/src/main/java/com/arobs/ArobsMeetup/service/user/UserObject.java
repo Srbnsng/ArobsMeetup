@@ -29,7 +29,16 @@ public class UserObject {
         if(user != null) {
             repository.remove(user);
         }
+    }
 
+    public void alterUser(int id,UserDTO userDTO){
+        IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
+        UserEntity user = (UserEntity)repository.find(id);
+        user.setFull_name(userDTO.getFull_name());
+        user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
+        user.setRole(userDTO.getRole());
+        repository.update(user);
     }
 
     public UserDTO findUser(int id){
@@ -51,6 +60,11 @@ public class UserObject {
         return null;
     }
 
-
+    public void addPoints(int id, int points){
+        IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
+        UserEntity user = (UserEntity)repository.find(id);
+        user.setPoints(user.getPoints() + points);
+        repository.update(user);
+    }
 
 }

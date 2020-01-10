@@ -44,7 +44,8 @@ public class ProposalEntity {
     private Set<UserEntity> userVotes = new HashSet<>();
 
 
-    public ProposalEntity(String title, UserEntity proposer, String description, String type, String difficulty, String language,int duration, int max_attends) {
+    public ProposalEntity(int id, String title, UserEntity proposer, String description, String type, String difficulty, String language,int duration, int max_attends) {
+        this.id = id;
         this.title = title;
         this.proposer = proposer;
         this.description = description;

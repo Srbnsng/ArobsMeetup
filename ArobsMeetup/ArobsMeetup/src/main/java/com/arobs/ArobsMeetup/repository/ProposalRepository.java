@@ -31,7 +31,7 @@ public class ProposalRepository implements IRepository<ProposalEntity> {
     }
 
     @Override
-    public void update(int id , ProposalEntity elem) {
+    public void update(ProposalEntity elem) {
         LOGGER.info("  ==> ProposalRepository =update() ");
         Session session = sessionFactory.getCurrentSession();
         session.update(elem);

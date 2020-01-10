@@ -31,17 +31,11 @@ public class UserRepository implements IRepository<UserEntity>{
     }
 
     @Override
-    public void update(int id, UserEntity elem) {
+    public void update(UserEntity elem) {
 
         LOGGER.info("  ==> UserRepository = update() ");
-        UserEntity thisUser = find(id);
-        thisUser.setPassword(elem.getPassword());
-        thisUser.setFull_name(elem.getFull_name());
-        thisUser.setRole(elem.getRole());
-        thisUser.setEmail(elem.getEmail());
-        thisUser.setPoints(elem.getPoints());
         Session session = sessionFactory.getCurrentSession();
-        session.update(thisUser);
+        session.update(elem);
 
     }
 

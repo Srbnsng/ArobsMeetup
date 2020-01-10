@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProposalDTO {
 
+    private int id;
     private String title;
     private UserEntity proposer;
     private String description;
@@ -20,7 +21,16 @@ public class ProposalDTO {
     private int duration;
     private int max_attends;
 
-    public ProposalDTO(UserEntity proposer, String title, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ProposalDTO(int id, UserEntity proposer, String title, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+        this.id = id;
         this.title = title;
         this.proposer = proposer;
         this.description = description;

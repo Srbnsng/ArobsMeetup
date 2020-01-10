@@ -23,6 +23,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override @Transactional
+    public void alterUser(int id,UserDTO userDTO) {
+        userObject.alterUser(id,userDTO);
+    }
+    @Override @Transactional
     public UserDTO findUser(int id) {
         return userObject.findUser(id);
     }
@@ -30,5 +34,10 @@ public class UserServiceImpl implements UserService {
     @Override @Transactional
     public List<UserDTO> findAllUsers() {
         return userObject.findAllUsers();
+    }
+
+    @Override
+    public void addPoints(int id, int points) {
+        userObject.addPoints(id,points);
     }
 }

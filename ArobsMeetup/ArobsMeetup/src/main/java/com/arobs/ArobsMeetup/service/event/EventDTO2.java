@@ -5,17 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @JsonSerialize
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EventDTO2 {
 
     private int id;
-    private UserEntity proposer_id;
+    private UserEntity proposer;
     private String title;
     private String description;
     private String type;
@@ -26,9 +22,9 @@ public class EventDTO2 {
     private Date event_date;
     private String room_name;
 
-    public EventDTO2(int id, UserEntity proposer_id, String title, String description, String type, String difficulty, String language, int duration, int max_attends, Date event_date, String room_name) {
+    public EventDTO2(int id, UserEntity proposer, String title, String description, String type, String difficulty, String language, int duration, int max_attends, Date event_date, String room_name) {
         this.id = id;
-        this.proposer_id = proposer_id;
+        this.proposer = proposer;
         this.title = title;
         this.description = description;
         this.type = type;
@@ -51,12 +47,12 @@ public class EventDTO2 {
         this.id = id;
     }
 
-    public UserEntity getProposer_id() {
-        return proposer_id;
+    public UserEntity getProposer() {
+        return proposer;
     }
 
-    public void setProposer_id(UserEntity proposer_id) {
-        this.proposer_id = proposer_id;
+    public void setProposer(UserEntity proposer) {
+        this.proposer = proposer;
     }
 
     public String getTitle() {

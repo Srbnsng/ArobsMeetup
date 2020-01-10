@@ -28,17 +28,17 @@ public class ProposalController {
     @PostMapping(path = "/create")
     public ResponseEntity<String> createProposal(@RequestBody ProposalDTO proposalDTO){
         proposalService.createProposal(proposalDTO);
-        return ResponseEntity.ok("Proposal created! ");
+        return ResponseEntity.ok("New Proposal created! ");
     }
 
-    @DeleteMapping(path ="/{id}")
-    public String deleteProposal(@PathVariable int id){
+    @DeleteMapping(path ="/deleteProposal/{id}")
+    public ResponseEntity<String> deleteProposal(@PathVariable int id){
         proposalService.deleteProposal(id);
-        return "HTTP Delete method called!";
+        return ResponseEntity.ok("Proposal with id " + id + " deleted! ");
     }
-    @PutMapping(path = "/{id}")
-    public String updateProposal(@PathVariable int id, @RequestBody ProposalDTO proposalDTO){
+    @PutMapping(path = "/updateProposal/{id}")
+    public ResponseEntity<String> updateProposal(@PathVariable int id, @RequestBody ProposalDTO proposalDTO){
         proposalService.alterProposal(id,proposalDTO);
-        return "HTTP update method called! ";
+        return ResponseEntity.ok("Proposal with id " + id + " updated! ");
     }
 }

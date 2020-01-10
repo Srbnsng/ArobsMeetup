@@ -32,7 +32,7 @@ public class EventRepository implements IRepository<EventEntity> {
     }
 
     @Override
-    public void update(int id,EventEntity elem){
+    public void update(EventEntity elem){
         LOGGER.info("  ==> EventRepository = update() ");
         Session session = sessionFactory.getCurrentSession();
         session.update(elem);

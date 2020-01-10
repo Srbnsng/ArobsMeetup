@@ -25,9 +25,21 @@ public class EventController {
         return ResponseEntity.ok(eventService.findAllEvents());
     }
 
-    @PostMapping(path = "/create")
-    public String createEvent(@RequestBody EventDTO eventDTO){
+    @PostMapping(path = "/createEvent")
+    public ResponseEntity<String> createEvent(@RequestBody EventDTO eventDTO){
         eventService.createEvent(eventDTO);
-        return "HTTP Create method called!";
+        return ResponseEntity.ok("New Event created! ");
+    }
+
+    @DeleteMapping(path = "/deleteEvent/{id}")
+    public ResponseEntity<String> deleteEvent(@PathVariable int id){
+        eventService.deleteEvent(id);
+        return ResponseEntity.ok("Event with id " + id + " deleted! ");
+    }
+
+    @PutMapping(path = "/updateEvent/{id}")
+    public ResponseEntity<String> updateEvent(@PathVariable int id, @RequestBody EventDTO2 eventDTO){
+        eventService.alterEvent(id,eventDTO);
+        return ResponseEntity.ok("Event with id " + id + " updated! ");
     }
 }

@@ -31,7 +31,15 @@ public class ProposalObject {
     }
     void alterProposal(int id, ProposalDTO proposalDTO){
         IRepository repository = factory.createRepository(RepositoryConstants.PROPOSAL_REPOSITORY_TYPE);
-        repository.update(id,proposalDTO);
+        ProposalEntity proposalEntity = (ProposalEntity)repository.find(id);
+        proposalEntity.setTitle(proposalDTO.getTitle());
+        proposalEntity.setDescription(proposalDTO.getDescription());
+        proposalEntity.setDuration(proposalDTO.getDuration());
+        proposalEntity.setDifficulty(proposalDTO.getDifficulty().toString());
+        proposalEntity.setLanguage(proposalDTO.getLanguage());
+        proposalEntity.setMax_attends(proposalDTO.getMax_attends());
+        proposalEntity.setProposer(proposalDTO.getProposer());
+        repository.update(proposalEntity);
     }
 
     ProposalDTO findProposal(int id){

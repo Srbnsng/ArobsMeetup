@@ -16,10 +16,9 @@ public class UserController {
     UserService userService;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<UserDTO> findUserById(@PathVariable int id) throws ClassNotFoundException {
+    public ResponseEntity<UserDTO> findUserById(@PathVariable int id){
         return ResponseEntity.ok(userService.findUser(id));
     }
-
     @GetMapping(path = "/")
     public ResponseEntity<List<UserDTO>> findAllUsers() {
         return ResponseEntity.ok(userService.findAllUsers());
@@ -28,7 +27,17 @@ public class UserController {
     @PostMapping(path = "/addUser")
     public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO){
         userService.addUser(userDTO);
-        return ResponseEntity.ok("User created! ");
+        return ResponseEntity.ok("New User created! ");
+    }
+    @DeleteMapping(path = "/deleteUser/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id){
+        userService.removeUser(id);
+        return ResponseEntity.ok("User with id "+ id + " deleted! ");
+    }
+    @PutMapping(path = "/updateUser/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable int id , @RequestBody UserDTO userDTO){
+        userService.alterUser(id, userDTO);
+        return ResponseEntity.ok("User with id " + id + " updated!");
     }
 }
 

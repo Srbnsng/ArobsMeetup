@@ -17,14 +17,14 @@ public class EventServiceImpl implements EventService{
         eventObject.createEvent(eventDTO);
     }
 
-    @Override
+    @Override @Transactional
     public void deleteEvent(int id) {
-
+        eventObject.removeEvent(id);
     }
 
-    @Override
-    public void alterEvent(int id, EventDTO eventDTO) {
-
+    @Override @Transactional
+    public void alterEvent(int id, EventDTO2 eventDTO) {
+        eventObject.alterEvent(id,eventDTO);
     }
 
     @Override @Transactional
@@ -32,8 +32,8 @@ public class EventServiceImpl implements EventService{
         return eventObject.findEvent(id);
     }
 
-    @Override
+    @Override @Transactional
     public List<EventDTO2> findAllEvents() {
-        return null;
+        return eventObject.findAllEvents();
     }
 }

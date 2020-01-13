@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override @Transactional
-    public void removeUser(int id) {
+    public void removeUser(int id) throws Exception {
         userObject.removeUser(id);
     }
 
     @Override @Transactional
-    public void alterUser(int id,UserDTO userDTO) {
+    public void alterUser(int id,UserDTO userDTO) throws Exception {
         userObject.alterUser(id,userDTO);
     }
     @Override @Transactional
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addPoints(int id, int points) {
+    public void addPoints(int id, int points) throws Exception {
         userObject.addPoints(id,points);
     }
 }

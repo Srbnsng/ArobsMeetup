@@ -7,8 +7,8 @@ import java.util.List;
 public interface ProposalService {
 
     void createProposal(ProposalDTO proposalDTO);
-    void deleteProposal(int id);
-    void alterProposal(int id, ProposalDTO proposalDTO);
+    void deleteProposal(int id) throws Exception;
+    void alterProposal(int id, ProposalDTO proposalDTO) throws Exception;
     ProposalDTO findProposal(int id);
     List<ProposalDTO> findAllProposals();
 }

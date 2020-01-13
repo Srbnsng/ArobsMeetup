@@ -31,13 +31,24 @@ public class UserController {
     }
     @DeleteMapping(path = "/deleteUser/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id){
-        userService.removeUser(id);
-        return ResponseEntity.ok("User with id "+ id + " deleted! ");
+        try {
+            userService.removeUser(id);
+            return ResponseEntity.ok("User with id "+ id + " deleted! ");
+
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
     @PutMapping(path = "/updateUser/{id}")
     public ResponseEntity<String> updateUser(@PathVariable int id , @RequestBody UserDTO userDTO){
-        userService.alterUser(id, userDTO);
-        return ResponseEntity.ok("User with id " + id + " updated!");
+        try {
+            userService.alterUser(id, userDTO);
+            return ResponseEntity.ok("User with id " + id + " updated!");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
 }
 

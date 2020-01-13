@@ -13,17 +13,17 @@ public class EventServiceImpl implements EventService{
     private EventObject eventObject;
 
     @Override @Transactional
-    public void createEvent(EventDTO eventDTO) {
+    public void createEvent(EventDTO eventDTO) throws Exception {
         eventObject.createEvent(eventDTO);
     }
 
     @Override @Transactional
-    public void deleteEvent(int id) {
+    public void deleteEvent(int id) throws Exception {
         eventObject.removeEvent(id);
     }
 
     @Override @Transactional
-    public void alterEvent(int id, EventDTO2 eventDTO) {
+    public void alterEvent(int id, EventDTO2 eventDTO) throws Exception {
         eventObject.alterEvent(id,eventDTO);
     }
 

@@ -8,9 +8,9 @@ import java.util.List;
 public interface UserService {
 
     void addUser(UserDTO userDTO);
-    void removeUser(int id);
-    void alterUser(int id, UserDTO userDTO);
+    void removeUser(int id) throws Exception;
+    void alterUser(int id, UserDTO userDTO) throws Exception;
     UserDTO findUser(int id);
     List<UserDTO> findAllUsers();
-    void addPoints(int id, int points);
+    void addPoints(int id, int points) throws Exception;
 }

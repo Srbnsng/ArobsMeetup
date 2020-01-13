@@ -22,24 +22,33 @@ public class ProposalObject {
         ProposalEntity proposalEntity = proposalMapper.map(proposalDTO,ProposalEntity.class);
         repository.add(proposalEntity);
     }
-    void deleteProposal(int id){
+    void deleteProposal(int id) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.PROPOSAL_REPOSITORY_TYPE);
         ProposalEntity proposal = (ProposalEntity)repository.find(id);
         if(proposal != null){
             repository.remove(proposal);
         }
+        else{
+            throw new Exception("Proposal id not found! ");
+        }
     }
-    void alterProposal(int id, ProposalDTO proposalDTO){
+    void alterProposal(int id, ProposalDTO proposalDTO) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.PROPOSAL_REPOSITORY_TYPE);
         ProposalEntity proposalEntity = (ProposalEntity)repository.find(id);
-        proposalEntity.setTitle(proposalDTO.getTitle());
-        proposalEntity.setDescription(proposalDTO.getDescription());
-        proposalEntity.setDuration(proposalDTO.getDuration());
-        proposalEntity.setDifficulty(proposalDTO.getDifficulty().toString());
-        proposalEntity.setLanguage(proposalDTO.getLanguage());
-        proposalEntity.setMax_attends(proposalDTO.getMax_attends());
-        proposalEntity.setProposer(proposalDTO.getProposer());
-        repository.update(proposalEntity);
+        if(proposalEntity != null){
+            proposalEntity.setTitle(proposalDTO.getTitle());
+            proposalEntity.setDescription(proposalDTO.getDescription());
+            proposalEntity.setDuration(proposalDTO.getDuration());
+            proposalEntity.setDifficulty(proposalDTO.getDifficulty().toString());
+            proposalEntity.setLanguage(proposalDTO.getLanguage());
+            proposalEntity.setMax_attends(proposalDTO.getMax_attends());
+            proposalEntity.setProposer(proposalDTO.getProposer());
+            repository.update(proposalEntity);
+        }
+        else{
+            throw new Exception("Proposal id not found! ");
+        }
+
     }
 
     ProposalDTO findProposal(int id){

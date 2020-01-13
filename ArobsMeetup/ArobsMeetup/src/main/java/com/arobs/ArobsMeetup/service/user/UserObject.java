@@ -23,22 +23,31 @@ public class UserObject {
 
     }
 
-    public void removeUser(int id){
+    public void removeUser(int id) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
         UserEntity user = (UserEntity)repository.find(id);
         if(user != null) {
             repository.remove(user);
         }
+        else{
+            throw new Exception("User id not found! ");
+        }
     }
 
-    public void alterUser(int id,UserDTO userDTO){
+    public void alterUser(int id,UserDTO userDTO) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
         UserEntity user = (UserEntity)repository.find(id);
-        user.setFull_name(userDTO.getFull_name());
-        user.setPassword(userDTO.getPassword());
-        user.setEmail(userDTO.getEmail());
-        user.setRole(userDTO.getRole());
-        repository.update(user);
+        if(user!=null){
+            user.setFull_name(userDTO.getFull_name());
+            user.setPassword(userDTO.getPassword());
+            user.setEmail(userDTO.getEmail());
+            user.setRole(userDTO.getRole());
+            repository.update(user);
+        }
+        else{
+            throw new Exception("User id not found! ");
+        }
+
     }
 
     public UserDTO findUser(int id){
@@ -60,11 +69,17 @@ public class UserObject {
         return null;
     }
 
-    public void addPoints(int id, int points){
+    public void addPoints(int id, int points) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
         UserEntity user = (UserEntity)repository.find(id);
-        user.setPoints(user.getPoints() + points);
-        repository.update(user);
+        if(user!=null){
+            user.setPoints(user.getPoints() + points);
+            repository.update(user);
+        }
+        else{
+            throw new Exception("User id not found! ");
+        }
+
     }
 
 }

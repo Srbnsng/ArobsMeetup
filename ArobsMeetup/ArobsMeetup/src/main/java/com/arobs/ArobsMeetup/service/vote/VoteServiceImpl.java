@@ -17,17 +17,17 @@ public class VoteServiceImpl implements VoteService{
 
 
     @Override @Transactional
-    public void addVote(int user_id, int proposal_id) {
+    public void addVote(int user_id, int proposal_id) throws Exception {
         voteObject.addVote(user_id,proposal_id);
     }
 
     @Override @Transactional
-    public void removeVote(int user_id, int proposal_id) {
+    public void removeVote(int user_id, int proposal_id) throws Exception {
         voteObject.removeVote(user_id,proposal_id);
     }
 
     @Override @Transactional
-    public Set<UserDTO> getProposalVoters(int proposal_id) {
+    public Set<UserDTO> getProposalVoters(int proposal_id){
         return voteObject.getProposalVoters(proposal_id);
     }
 

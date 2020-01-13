@@ -27,19 +27,34 @@ public class EventController {
 
     @PostMapping(path = "/createEvent")
     public ResponseEntity<String> createEvent(@RequestBody EventDTO eventDTO){
-        eventService.createEvent(eventDTO);
-        return ResponseEntity.ok("New Event created! ");
+        try {
+            eventService.createEvent(eventDTO);
+            return ResponseEntity.ok("New Event created! ");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
 
     @DeleteMapping(path = "/deleteEvent/{id}")
     public ResponseEntity<String> deleteEvent(@PathVariable int id){
-        eventService.deleteEvent(id);
-        return ResponseEntity.ok("Event with id " + id + " deleted! ");
+        try {
+            eventService.deleteEvent(id);
+            return ResponseEntity.ok("Event with id " + id + " deleted! ");
+        } catch (Exception e) {
+           return ResponseEntity.ok(e.getMessage());
+        }
+
     }
 
     @PutMapping(path = "/updateEvent/{id}")
     public ResponseEntity<String> updateEvent(@PathVariable int id, @RequestBody EventDTO2 eventDTO){
-        eventService.alterEvent(id,eventDTO);
-        return ResponseEntity.ok("Event with id " + id + " updated! ");
+        try {
+            eventService.alterEvent(id,eventDTO);
+            return ResponseEntity.ok("Event with id " + id + " updated! ");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
 }

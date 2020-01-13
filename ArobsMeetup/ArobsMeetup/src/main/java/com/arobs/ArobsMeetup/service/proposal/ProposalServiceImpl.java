@@ -18,12 +18,12 @@ public class ProposalServiceImpl implements ProposalService {
     }
 
     @Override @Transactional
-    public void deleteProposal(int id) {
+    public void deleteProposal(int id) throws Exception {
         proposalObject.deleteProposal(id);
     }
 
     @Override @Transactional
-    public void alterProposal(int id, ProposalDTO proposalDTO) {
+    public void alterProposal(int id, ProposalDTO proposalDTO) throws Exception {
         proposalObject.alterProposal(id,proposalDTO);
     }
     @Override @Transactional

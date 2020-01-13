@@ -20,18 +20,32 @@ public class VoteController {
 
     @PostMapping(path = "/createVote/user{user_id}/proposal{proposal_id}")
     public ResponseEntity<String> createVote(@PathVariable int user_id, @PathVariable int proposal_id) {
-        voteService.addVote(user_id, proposal_id);
-        return ResponseEntity.ok("Vote submitted !");
+        try{
+            voteService.addVote(user_id, proposal_id);
+            return ResponseEntity.ok("Vote submitted !");
+        }
+        catch (Exception e){
+            return ResponseEntity.ok(e.getMessage());
+        }
+
+
     }
 
     @DeleteMapping(path = "/removeVote/user{user_id}/proposal{proposal_id}")
     public ResponseEntity<String> removeVote(@PathVariable int user_id, @PathVariable int proposal_id){
-        voteService.removeVote(user_id,proposal_id);
-        return ResponseEntity.ok("Vote unsubmitted !");
+        try{
+            voteService.removeVote(user_id,proposal_id);
+            return ResponseEntity.ok("Vote removed !");
+        }
+        catch (Exception e){
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
 
     @GetMapping(path = "/getUserVotedProposals/user{user_id}")
     public ResponseEntity<Set<ProposalDTO>> getUserVotedProposals(@PathVariable int user_id){
+
         return ResponseEntity.ok(voteService.getUserVotes(user_id));
     }
 

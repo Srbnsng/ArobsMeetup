@@ -13,12 +13,12 @@ public class AttendanceServiceImpl implements AttendanceService {
     AttendanceObject attendanceObject;
 
     @Override @Transactional
-    public void addAttendance(int user_id, int event_id) {
+    public void addAttendance(int user_id, int event_id) throws Exception {
         attendanceObject.addAttendance(user_id,event_id);
     }
 
     @Override @Transactional
-    public void removeAttendance(int id) {
+    public void removeAttendance(int id) throws Exception {
         attendanceObject.removeAttendance(id);
     }
 
@@ -43,7 +43,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override @Transactional
-    public void giveFeedback(int id, int mark, String note) {
+    public void giveFeedback(int id, int mark, String note) throws Exception {
         attendanceObject.giveFeedback(id,mark,note);
     }
 }

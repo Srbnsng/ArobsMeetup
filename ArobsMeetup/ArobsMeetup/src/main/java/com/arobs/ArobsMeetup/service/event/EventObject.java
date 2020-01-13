@@ -18,7 +18,7 @@ public class EventObject {
     @Autowired
     private EventMapper eventMapper;
 
-    public void createEvent(EventDTO eventDTO){
+    public void createEvent(EventDTO eventDTO) throws Exception {
 
         IRepository proposal_repo = factory.createRepository(RepositoryConstants.PROPOSAL_REPOSITORY_TYPE);
         IRepository event_repo = factory.createRepository(RepositoryConstants.EVENT_REPOSITORY_TYPE);
@@ -29,8 +29,7 @@ public class EventObject {
             proposal_repo.remove(proposalEntity);
         }
         else{
-            // This will be not here but for the moment is just as an example
-            System.out.println("Proposal not found!");
+            throw new Exception("Proposal not found! ");
         }
     }
 
@@ -41,11 +40,8 @@ public class EventObject {
         if(eventEntity!=null)
             return eventMapper.map(eventEntity,EventDTO2.class);
         else{
-            // This will be not here but for the moment is just as an example of error
-            System.out.println("Event not found!");
+            return null;
         }
-
-        return null;
     }
 
     public List<EventDTO2>findAllEvents(){
@@ -53,26 +49,21 @@ public class EventObject {
         List<EventEntity> events = repository.findAll();
         if(events !=null)
             return eventMapper.mapAsList(events,EventDTO2.class);
-        else{
-            // This will be not here but for the moment is just as an example of error
-            System.out.println("No events !");
-        }
 
         return null;
     }
 
-    public void removeEvent(int id){
+    public void removeEvent(int id) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.EVENT_REPOSITORY_TYPE);
         EventEntity eventEntity = (EventEntity)repository.find(id);
         if(eventEntity != null)
             repository.remove(eventEntity);
         else{
-            // This will be not here but for the moment is just as an example of error
-            System.out.println("Event not found!");
+            throw new Exception("Event id not found! ");
         }
     }
 
-    public void alterEvent(int id,EventDTO2 eventDTO){
+    public void alterEvent(int id,EventDTO2 eventDTO) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.EVENT_REPOSITORY_TYPE);
         EventEntity eventEntity = (EventEntity)repository.find(id);
         if(eventEntity != null ){
@@ -89,8 +80,7 @@ public class EventObject {
             repository.update(eventEntity);
         }
         else{
-            // This will be not here but for the moment is just as an example of error
-            System.out.println("Event not found!");
+            throw new Exception("Event id not found! ");
         }
 
     }

@@ -33,12 +33,22 @@ public class ProposalController {
 
     @DeleteMapping(path ="/deleteProposal/{id}")
     public ResponseEntity<String> deleteProposal(@PathVariable int id){
-        proposalService.deleteProposal(id);
-        return ResponseEntity.ok("Proposal with id " + id + " deleted! ");
+        try {
+            proposalService.deleteProposal(id);
+            return ResponseEntity.ok("Proposal with id " + id + " deleted! ");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
     @PutMapping(path = "/updateProposal/{id}")
     public ResponseEntity<String> updateProposal(@PathVariable int id, @RequestBody ProposalDTO proposalDTO){
-        proposalService.alterProposal(id,proposalDTO);
-        return ResponseEntity.ok("Proposal with id " + id + " updated! ");
+        try {
+            proposalService.alterProposal(id,proposalDTO);
+            return ResponseEntity.ok("Proposal with id " + id + " updated! ");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
 }

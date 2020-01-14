@@ -27,8 +27,12 @@ public class ProposalController {
 
     @PostMapping(path = "/create")
     public ResponseEntity<String> createProposal(@RequestBody ProposalDTO proposalDTO){
-        proposalService.createProposal(proposalDTO);
-        return ResponseEntity.ok("New Proposal created! ");
+        try {
+            proposalService.createProposal(proposalDTO);
+            return ResponseEntity.ok("New Proposal created! ");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
     }
 
     @DeleteMapping(path ="/deleteProposal/{id}")

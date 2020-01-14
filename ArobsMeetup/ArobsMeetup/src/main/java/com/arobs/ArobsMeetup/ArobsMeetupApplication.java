@@ -6,10 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.List;
 
-@SpringBootApplication
+@SpringBootApplication @EnableScheduling
 public class ArobsMeetupApplication {
 
 	public static void main(String[] args) {

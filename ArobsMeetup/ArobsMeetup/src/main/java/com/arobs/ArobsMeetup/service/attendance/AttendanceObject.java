@@ -1,19 +1,18 @@
 package com.arobs.ArobsMeetup.service.attendance;
 
+import com.arobs.ArobsMeetup.constants.AwardingConstants;
 import com.arobs.ArobsMeetup.entity.AttendanceEntity;
 import com.arobs.ArobsMeetup.entity.EventEntity;
-import com.arobs.ArobsMeetup.entity.ProposalEntity;
 import com.arobs.ArobsMeetup.entity.UserEntity;
 import com.arobs.ArobsMeetup.repository.AttendanceRepository;
 import com.arobs.ArobsMeetup.repository.IRepository;
-import com.arobs.ArobsMeetup.repository.RepositoryConstants;
+import com.arobs.ArobsMeetup.constants.RepositoryConstants;
 import com.arobs.ArobsMeetup.repository.RepositoryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class AttendanceObject {
@@ -110,12 +109,18 @@ public class AttendanceObject {
         IRepository user_repo = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
         AttendanceEntity attendanceEntity = attendanceRepository.find(id);
         UserEntity user =(UserEntity)user_repo.find(attendanceEntity.getUser().getId());
-        if(attendanceEntity != null){
-            attendanceEntity.setMark(mark);
-            attendanceEntity.setNote(note);
-            user.setPoints(user.getPoints()+2);
-            attendanceRepository.update(attendanceEntity);
-            user_repo.update(user);
+        if(attendanceEntity != null ){
+            if(!attendanceEntity.getEvent().getAvailability()){
+                attendanceEntity.setMark(mark);
+                attendanceEntity.setNote(note);
+                user.setPoints(user.getPoints()+ AwardingConstants.FEEDBACK_POINTS);
+                attendanceRepository.update(attendanceEntity);
+                user_repo.update(user);
+            }
+            else{
+                throw new Exception("Feedbacks are allowed after the event ends! ");
+            }
+
         }
         else{
             throw new Exception("Attendance not found! ");

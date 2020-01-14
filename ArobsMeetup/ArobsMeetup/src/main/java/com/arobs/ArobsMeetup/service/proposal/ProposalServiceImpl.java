@@ -13,7 +13,7 @@ public class ProposalServiceImpl implements ProposalService {
     private ProposalObject proposalObject;
 
     @Override @Transactional
-    public void createProposal(ProposalDTO proposalDTO) {
+    public void createProposal(ProposalDTO proposalDTO) throws Exception {
         proposalObject.createProposal(proposalDTO);
     }
 

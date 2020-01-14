@@ -1,8 +1,6 @@
 package com.arobs.ArobsMeetup.service.proposal;
 
 import com.arobs.ArobsMeetup.entity.UserEntity;
-import com.arobs.ArobsMeetup.service.dto.enums.Difficulty;
-import com.arobs.ArobsMeetup.service.dto.enums.Type;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -15,8 +13,8 @@ public class ProposalDTO {
     private String title;
     private UserEntity proposer;
     private String description;
-    private Type type;
-    private Difficulty difficulty;
+    private String type;
+    private String difficulty;
     private String language;
     private int duration;
     private int max_attends;
@@ -29,7 +27,7 @@ public class ProposalDTO {
         this.id = id;
     }
 
-    public ProposalDTO(int id, UserEntity proposer, String title, String description, Type type, Difficulty difficulty, String language, int duration, int max_attends) {
+    public ProposalDTO(int id, UserEntity proposer, String title, String description, String type, String difficulty, String language, int duration, int max_attends) {
         this.id = id;
         this.title = title;
         this.proposer = proposer;
@@ -60,19 +58,19 @@ public class ProposalDTO {
         this.description = description;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Difficulty getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 

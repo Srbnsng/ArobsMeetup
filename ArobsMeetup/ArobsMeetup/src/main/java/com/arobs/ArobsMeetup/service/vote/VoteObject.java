@@ -1,10 +1,11 @@
 package com.arobs.ArobsMeetup.service.vote;
 
 
+import com.arobs.ArobsMeetup.constants.AwardingConstants;
 import com.arobs.ArobsMeetup.entity.ProposalEntity;
 import com.arobs.ArobsMeetup.entity.UserEntity;
 import com.arobs.ArobsMeetup.repository.IRepository;
-import com.arobs.ArobsMeetup.repository.RepositoryConstants;
+import com.arobs.ArobsMeetup.constants.RepositoryConstants;
 import com.arobs.ArobsMeetup.repository.RepositoryFactory;
 import com.arobs.ArobsMeetup.repository.VoteRepository;
 import com.arobs.ArobsMeetup.service.proposal.ProposalDTO;
@@ -41,6 +42,7 @@ public class VoteObject {
         validateVote(user, proposal);
         if(verifyIfVoted(user.getId(),proposal.getId()))
             throw new Exception("This user already voted this proposal !");
+        user.setPoints(user.getPoints()+ AwardingConstants.VOTE_POINTS);
         user_repo.update(user);
         voteRepository.add(user_id, proposal_id);
     }

@@ -3,6 +3,7 @@ package com.arobs.ArobsMeetup.service.event;
 import com.arobs.ArobsMeetup.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
@@ -19,10 +20,11 @@ public class EventDTO2 {
     private String language;
     private int duration;
     private int max_attends;
-    private Date event_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String event_date;
     private String room_name;
 
-    public EventDTO2(int id, UserEntity proposer, String title, String description, String type, String difficulty, String language, int duration, int max_attends, Date event_date, String room_name) {
+    public EventDTO2(int id, UserEntity proposer, String title, String description, String type, String difficulty, String language, int duration, int max_attends, String event_date, String room_name) {
         this.id = id;
         this.proposer = proposer;
         this.title = title;
@@ -119,11 +121,11 @@ public class EventDTO2 {
         this.room_name = room_name;
     }
 
-    public Date getEvent_date() {
+    public String getEvent_date() {
         return event_date;
     }
 
-    public void setEvent_date(Date event_date) {
+    public void setEvent_date(String event_date) {
         this.event_date = event_date;
     }
 

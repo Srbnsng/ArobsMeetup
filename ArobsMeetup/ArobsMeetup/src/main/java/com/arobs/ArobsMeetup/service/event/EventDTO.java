@@ -4,9 +4,12 @@ package com.arobs.ArobsMeetup.service.event;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.apache.tomcat.jni.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @JsonSerialize
@@ -14,13 +17,14 @@ import java.sql.Time;
 public class EventDTO {
 
     private int proposal_id;
-    private Date event_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String event_date;
     private String room_name;
 
     public EventDTO() {
     }
 
-    public EventDTO(int proposal_id, Date event_date, String room_name) {
+    public EventDTO(int proposal_id, String event_date, String room_name) {
         this.proposal_id = proposal_id;
         this.event_date = event_date;
         this.room_name = room_name;
@@ -44,11 +48,11 @@ public class EventDTO {
         this.room_name = room_name;
     }
 
-    public Date getEvent_date() {
+    public String getEvent_date() {
         return event_date;
     }
 
-    public void setEvent_date(Date event_date) {
+    public void setEvent_date(String event_date) {
         this.event_date = event_date;
     }
 

@@ -1,5 +1,6 @@
 package com.arobs.ArobsMeetup.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -39,17 +40,23 @@ public class EventEntity {
     @Column(name = "max_attends")
     private int max_attends;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "event_date")
-    private Date event_date;
+    private String event_date;
 
     @Column(name = "room_name" , length = 30)
     private String room_name;
+
+    @Column(name = "availability")
+    private boolean availability;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true, mappedBy = "event")
     private Set<AttendanceEntity> attendees = new HashSet<>();
 
-    public EventEntity(ProposalEntity proposalEntity,Date event_date, String room_name) {
+
+
+    public EventEntity(ProposalEntity proposalEntity, String event_date, String room_name) {
 
         this.title = proposalEntity.getTitle();
         this.proposer = proposalEntity.getProposer();
@@ -61,6 +68,7 @@ public class EventEntity {
         this.max_attends = proposalEntity.getMax_attends();
         this.event_date = event_date;
         this.room_name = room_name;
+        this.availability = true;
     }
 
     public EventEntity() {
@@ -147,11 +155,11 @@ public class EventEntity {
         this.room_name = room_name;
     }
 
-    public Date getEvent_date() {
+    public String getEvent_date() {
         return event_date;
     }
 
-    public void setEvent_date(Date event_date) {
+    public void setEvent_date(String event_date) {
         this.event_date = event_date;
     }
 
@@ -161,6 +169,14 @@ public class EventEntity {
 
     public void setProposer(UserEntity proposer) {
         this.proposer = proposer;
+    }
+
+    public boolean getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public Set<AttendanceEntity> getAttendees() {

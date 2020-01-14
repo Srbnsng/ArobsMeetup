@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override @Transactional
-    public void addUser(UserDTO userDTO) {
+    public void addUser(UserDTO userDTO) throws Exception {
         userObject.addUser(userDTO);
     }
 

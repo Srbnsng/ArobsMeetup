@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public interface UserService {
 
-    void addUser(UserDTO userDTO);
+    void addUser(UserDTO userDTO) throws Exception;
     void removeUser(int id) throws Exception;
     void alterUser(int id, UserDTO userDTO) throws Exception;
     UserDTO findUser(int id);

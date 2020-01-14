@@ -26,8 +26,13 @@ public class UserController {
 
     @PostMapping(path = "/addUser")
     public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO){
-        userService.addUser(userDTO);
-        return ResponseEntity.ok("New User created! ");
+        try {
+            userService.addUser(userDTO);
+            return ResponseEntity.ok("New User created! ");
+        } catch (Exception e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
     }
     @DeleteMapping(path = "/deleteUser/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id){

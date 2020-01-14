@@ -1,7 +1,8 @@
 package com.arobs.ArobsMeetup.service.user;
+import com.arobs.ArobsMeetup.constants.UserConstants;
 import com.arobs.ArobsMeetup.entity.UserEntity;
 import com.arobs.ArobsMeetup.repository.IRepository;
-import com.arobs.ArobsMeetup.repository.RepositoryConstants;
+import com.arobs.ArobsMeetup.constants.RepositoryConstants;
 import com.arobs.ArobsMeetup.repository.RepositoryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,13 +16,22 @@ public class UserObject {
     @Autowired
     private UserMapper userMapper;
 
-    public void addUser(UserDTO userDTO){
+    public void addUser(UserDTO userDTO) throws Exception {
 
         IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
-        UserEntity userEntity = userMapper.map(userDTO,UserEntity.class);
-        repository.add(userEntity);
-
+        if(isRoleValid(userDTO.getRole())){
+            UserEntity userEntity = userMapper.map(userDTO,UserEntity.class);
+            repository.add(userEntity);
+        }
+        else{
+            throw new Exception("User role invalid! ");
+        }
     }
+
+    private boolean isRoleValid(String role) {
+        return role.equals(UserConstants.ADMIN_ROLE) || role.equals(UserConstants.REGULAR_ROLE);
+    }
+
 
     public void removeUser(int id) throws Exception {
         IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);

@@ -1,6 +1,5 @@
 package com.arobs.ArobsMeetup.service.event;
 
-import com.arobs.ArobsMeetup.service.proposal.ProposalMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

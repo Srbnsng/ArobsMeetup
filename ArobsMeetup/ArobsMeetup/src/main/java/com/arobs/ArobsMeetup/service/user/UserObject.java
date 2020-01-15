@@ -4,9 +4,13 @@ import com.arobs.ArobsMeetup.entity.UserEntity;
 import com.arobs.ArobsMeetup.repository.IRepository;
 import com.arobs.ArobsMeetup.constants.RepositoryConstants;
 import com.arobs.ArobsMeetup.repository.RepositoryFactory;
+import com.arobs.ArobsMeetup.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 import java.util.List;
+
 
 @Component
 public class UserObject {
@@ -91,5 +95,26 @@ public class UserObject {
         }
 
     }
+
+//    public List<UserDTO> getTopUserList(){
+//        IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
+//        List<UserEntity> users = repository.findAll();
+//        if(users!=null) {
+//            UserEntity[] userArray =(UserEntity[]) users.toArray();
+//            int n = users.size();
+//            UserEntity temp;
+//            for(int i=0; i < n; i++){
+//                for(int j=1; j < (n-i); j++){
+//                    if(userArray[j-1].getPoints() > userArray[j].getPoints()){
+//                        temp = userArray[j-1];
+//                        userArray[j-1] =userArray[j];
+//                        userArray[j] = temp;
+//                    }
+//                }
+//            }
+//            return userMapper.mapAsList( Arrays.asList(userArray), UserDTO.class);
+//        }
+//       return null;
+//    }
 
 }

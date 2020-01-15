@@ -1,6 +1,6 @@
 package com.arobs.ArobsMeetup.repository;
 
-import com.arobs.ArobsMeetup.entity.UserEntity;
+import com.arobs.ArobsMeetup.entity.PrizeEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,57 +12,53 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class UserRepository implements IRepository<UserEntity>{
+public class PrizeRepository implements IRepository<PrizeEntity> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserRepository.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProposalRepository.class);
 
     @Autowired
     SessionFactory sessionFactory;
 
     @Override
-    public void add(UserEntity elem) {
-
-        LOGGER.info("  ==> UserRepository = add() ");
+    public void add(PrizeEntity elem) {
+        LOGGER.info("  ==> PrizeRepository = add() ");
         Session session = sessionFactory.getCurrentSession();
         session.save(elem);
     }
 
     @Override
-    public void update(UserEntity elem) {
-
-        LOGGER.info("  ==> UserRepository = update() ");
+    public void update(PrizeEntity elem) {
+        LOGGER.info("  ==> PrizeRepository = add() ");
         Session session = sessionFactory.getCurrentSession();
-        session.update(elem);
-
+        session.save(elem);
     }
 
     @Override
-    public void remove(UserEntity elem) {
-        LOGGER.info("  ==> UserRepository = remove() ");
+    public void remove(PrizeEntity elem) {
+        LOGGER.info("  ==> PrizeRepository = remove() ");
         Session session = sessionFactory.getCurrentSession();
         session.remove(elem);
     }
 
     @Override
-    public UserEntity find(int id) {
-        LOGGER.info("  ==> UserRepository = find() ");
+    public PrizeEntity find(int id) {
+        LOGGER.info("  ==> PrizeRepository = find() ");
         Session session = sessionFactory.getCurrentSession();
-        return session.get(UserEntity.class , id);
+        return session.get(PrizeEntity.class,id);
     }
 
     @Override
-    public List<UserEntity> findAll() {
-        LOGGER.info("  ==> UserRepository = findAll() ");
+    public List<PrizeEntity> findAll() {
+        LOGGER.info("  ==> PrizeRepository = findAll() ");
         Session session = sessionFactory.getCurrentSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);
-        Root<UserEntity> root = criteriaQuery.from(UserEntity.class);
+        CriteriaQuery<PrizeEntity> criteriaQuery = criteriaBuilder.createQuery(PrizeEntity.class);
+        Root<PrizeEntity> root = criteriaQuery.from(PrizeEntity.class);
         criteriaQuery.select(root);
-        Query<UserEntity> query = session.createQuery(criteriaQuery);
+        Query<PrizeEntity> query = session.createQuery(criteriaQuery);
 
         return query.getResultList();
     }

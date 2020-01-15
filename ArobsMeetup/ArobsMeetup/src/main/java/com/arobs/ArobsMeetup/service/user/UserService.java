@@ -2,6 +2,7 @@ package com.arobs.ArobsMeetup.service.user;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -13,4 +14,5 @@ public interface UserService {
     UserDTO findUser(int id);
     List<UserDTO> findAllUsers();
     void addPoints(int id, int points) throws Exception;
+    //List<UserDTO> getTopUserList();
 }

@@ -2,7 +2,6 @@ package com.arobs.ArobsMeetup.service.event;
 
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service

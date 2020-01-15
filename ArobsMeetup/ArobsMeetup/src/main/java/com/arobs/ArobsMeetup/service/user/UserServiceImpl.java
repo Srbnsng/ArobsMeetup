@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class UserServiceImpl implements UserService {
@@ -36,8 +37,15 @@ public class UserServiceImpl implements UserService {
         return userObject.findAllUsers();
     }
 
-    @Override
+    @Override @Transactional
     public void addPoints(int id, int points) throws Exception {
         userObject.addPoints(id,points);
     }
+
+//    @Override @Transactional
+//    public List<UserDTO> getTopUserList() {
+//        return userObject.getTopUserList();
+//    }
+
+
 }

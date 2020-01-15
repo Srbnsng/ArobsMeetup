@@ -12,6 +12,8 @@ public class RepositoryFactory {
     ProposalRepository proposalRepository;
     @Autowired
     EventRepository eventRepository;
+    @Autowired
+    PrizeRepository prizeRepository;
 
     public IRepository createRepository(String type){
 
@@ -24,6 +26,10 @@ public class RepositoryFactory {
         if(type.equals("EVENT")){
             return eventRepository;
         }
+        if(type.equals("PRIZE")){
+            return prizeRepository;
+        }
+
 
         return null;
     }

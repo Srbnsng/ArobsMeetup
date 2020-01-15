@@ -5,10 +5,10 @@ import com.arobs.ArobsMeetup.entity.AttendanceEntity;
 import com.arobs.ArobsMeetup.entity.EventEntity;
 import com.arobs.ArobsMeetup.entity.ProposalEntity;
 import com.arobs.ArobsMeetup.entity.UserEntity;
-import com.arobs.ArobsMeetup.repository.AttendanceRepository;
 import com.arobs.ArobsMeetup.repository.IRepository;
 import com.arobs.ArobsMeetup.constants.RepositoryConstants;
 import com.arobs.ArobsMeetup.repository.RepositoryFactory;
+import com.arobs.ArobsMeetup.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -29,6 +29,8 @@ public class EventObject {
     private RepositoryFactory factory;
     @Autowired
     private EventMapper eventMapper;
+    @Autowired
+    private VoteRepository voteRepository;
 
     public void createEvent(EventDTO eventDTO) throws Exception {
 
@@ -41,6 +43,10 @@ public class EventObject {
                 dateFormat.setLenient(false);
                 dateFormat.parse(eventDTO.getEvent_date().trim());
                 EventEntity eventEntity = new EventEntity(proposalEntity, eventDTO.getEvent_date(), eventDTO.getRoom_name());
+                Set<UserEntity> voters = proposalEntity.getUserVotes();
+                for(UserEntity user : voters){
+                    voteRepository.remove(user.getId(),proposalEntity.getId());
+                }
                 event_repo.add(eventEntity);
                 proposal_repo.remove(proposalEntity);
             } else {
@@ -137,6 +143,7 @@ public class EventObject {
     private void awardOrganiser(EventEntity event) {
 
         UserEntity organiser = event.getProposer();
+        System.out.println(organiser.getFull_name()+ " = " + organiser.getPoints());
         IRepository user_repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
         if(event.getType().equals("Easy")){
             organiser.setPoints(organiser.getPoints()+AwardingConstants.EASY_LEVEL_POINTS);
@@ -148,6 +155,8 @@ public class EventObject {
             organiser.setPoints(organiser.getPoints()+AwardingConstants.HIGH_LEVEL_POINTS);
         }
         user_repository.update(organiser);
+        organiser = (UserEntity) user_repository.find(organiser.getId());
+        System.out.println(organiser.getFull_name()+ " = " + organiser.getPoints());
     }
 
     public void awardUsers(EventEntity event){

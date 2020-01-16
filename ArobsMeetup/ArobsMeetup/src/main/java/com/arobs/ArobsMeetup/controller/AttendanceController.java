@@ -16,12 +16,12 @@ public class AttendanceController {
     AttendanceService attendanceService;
 
     @PostMapping(path = "/attendEvent/user{id_user}/event{id_event}")
-    public ResponseEntity<String> attendEvent(@PathVariable int id_user, @PathVariable int id_event){
+    public ResponseEntity<?> attendEvent(@PathVariable int id_user, @PathVariable int id_event){
         try {
             attendanceService.addAttendance(id_user,id_event);
-            return ResponseEntity.ok("An attend was commit! ");
+            return ResponseEntity.status(201).body("An attend was commit! ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
@@ -46,12 +46,12 @@ public class AttendanceController {
     }
 
     @PostMapping(path = "/giveFeedback/{id}/{mark}/{note}")
-    public ResponseEntity<String> attendEvent(@PathVariable int id , @PathVariable int mark , @PathVariable String note){
+    public ResponseEntity<?> attendEvent(@PathVariable int id , @PathVariable int mark , @PathVariable String note){
         try {
             attendanceService.giveFeedback(id,mark,note);
-            return ResponseEntity.ok("Feedback submitted !");
+            return ResponseEntity.status(201).body("Feedback submitted !");
         } catch (Exception e) {
-           return ResponseEntity.ok(e.getMessage());
+           return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }

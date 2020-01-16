@@ -26,34 +26,34 @@ public class EventController {
     }
 
     @PostMapping(path = "/createEvent")
-    public ResponseEntity<String> createEvent(@RequestBody EventDTO eventDTO){
+    public ResponseEntity<?> createEvent(@RequestBody EventDTO eventDTO){
         try {
             eventService.createEvent(eventDTO);
-            return ResponseEntity.ok("New Event created! ");
+            return ResponseEntity.status(201).body("New Event created! ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }
 
     @DeleteMapping(path = "/deleteEvent/{id}")
-    public ResponseEntity<String> deleteEvent(@PathVariable int id){
+    public ResponseEntity<?> deleteEvent(@PathVariable int id){
         try {
             eventService.deleteEvent(id);
-            return ResponseEntity.ok("Event with id " + id + " deleted! ");
+            return ResponseEntity.status(200).body("Event with id " + id + " deleted! ");
         } catch (Exception e) {
-           return ResponseEntity.ok(e.getMessage());
+           return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }
 
     @PutMapping(path = "/updateEvent/{id}")
-    public ResponseEntity<String> updateEvent(@PathVariable int id, @RequestBody EventDTO2 eventDTO){
+    public ResponseEntity<?> updateEvent(@PathVariable int id, @RequestBody EventDTO2 eventDTO){
         try {
             eventService.alterEvent(id,eventDTO);
-            return ResponseEntity.ok("Event with id " + id + " updated! ");
+            return ResponseEntity.status(200).body("Event with id " + id + " updated! ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }

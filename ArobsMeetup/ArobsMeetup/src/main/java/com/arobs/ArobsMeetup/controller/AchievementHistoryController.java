@@ -17,13 +17,13 @@ public class AchievementHistoryController {
     AchievmentHistoryService achievmentHistoryService;
 
     @PostMapping(path = "/addAchievement/{user_id}/{prize_id}/{date}")
-    public ResponseEntity<String> addAchievement(@PathVariable int user_id , @PathVariable int prize_id ,
+    public ResponseEntity<?> addAchievement(@PathVariable int user_id , @PathVariable int prize_id ,
                                                  @PathVariable Date date){
         try {
             achievmentHistoryService.addAchievement(user_id,prize_id,date);
-            return ResponseEntity.ok("Achievement added! ");
+            return ResponseEntity.status(201).body("Achievement added! ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 

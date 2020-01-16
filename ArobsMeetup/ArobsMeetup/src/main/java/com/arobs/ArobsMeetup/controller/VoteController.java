@@ -22,10 +22,9 @@ public class VoteController {
     public ResponseEntity<String> createVote(@PathVariable int user_id, @PathVariable int proposal_id) {
         try{
             voteService.addVote(user_id, proposal_id);
-            return ResponseEntity.ok("Vote submitted !");
-        }
-        catch (Exception e){
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(201).body("New Vote added!  ");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
 
@@ -35,10 +34,9 @@ public class VoteController {
     public ResponseEntity<String> removeVote(@PathVariable int user_id, @PathVariable int proposal_id){
         try{
             voteService.removeVote(user_id,proposal_id);
-            return ResponseEntity.ok("Vote removed !");
-        }
-        catch (Exception e){
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(200).body("Vote deleted! ");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }

@@ -28,9 +28,9 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody UserDTO userDTO){
         try {
             userService.addUser(userDTO);
-            return ResponseEntity.ok("New User created! ");
+            return ResponseEntity.status(201).body("New User created1 ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }
@@ -38,10 +38,9 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable int id){
         try {
             userService.removeUser(id);
-            return ResponseEntity.ok("User with id "+ id + " deleted! ");
-
+            return ResponseEntity.status(200).body("User with id " + id + " deleted! ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }
@@ -49,9 +48,9 @@ public class UserController {
     public ResponseEntity<String> updateUser(@PathVariable int id , @RequestBody UserDTO userDTO){
         try {
             userService.alterUser(id, userDTO);
-            return ResponseEntity.ok("User with id " + id + " updated!");
+            return ResponseEntity.status(200).body("User with id " + id + " updated! ");
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
 
     }

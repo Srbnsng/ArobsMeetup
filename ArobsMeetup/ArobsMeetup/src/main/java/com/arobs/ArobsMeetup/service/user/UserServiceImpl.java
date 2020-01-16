@@ -38,14 +38,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override @Transactional
-    public void addPoints(int id, int points) throws Exception {
-        userObject.addPoints(id,points);
+    public List<UserDTO> getTopUserList() {
+        return userObject.getTopUserList();
     }
-
-//    @Override @Transactional
-//    public List<UserDTO> getTopUserList() {
-//        return userObject.getTopUserList();
-//    }
 
 
 }

@@ -1,8 +1,8 @@
 package com.arobs.ArobsMeetup.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity( name = "AchievementHistoryEntity")
 @Table(name = "achievementhistory")
@@ -25,10 +25,10 @@ public class AchievementHistoryEntity {
     @Column(name = "date_time")
     private Date date_time;
 
-    public AchievementHistoryEntity(UserEntity user, PrizeEntity prize, int points, Date date_time) {
+    public AchievementHistoryEntity(UserEntity user, PrizeEntity prize, Date date_time) {
         this.user = user;
         this.prize = prize;
-        this.points = points;
+        this.points = user.getPoints();
         this.date_time = date_time;
     }
 

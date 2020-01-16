@@ -55,10 +55,10 @@ public class UserController {
         }
 
     }
-//    @GetMapping(path = "/userTopList")
-//    public ResponseEntity<List<UserDTO>> getUserTopList(){
-//        return ResponseEntity.ok(userService.getTopUserList());
-//    }
+    @GetMapping(path = "/userTopList")
+    public ResponseEntity<List<UserDTO>> getUserTopList(){
+        return ResponseEntity.ok(userService.getTopUserList());
+    }
 
 }
 

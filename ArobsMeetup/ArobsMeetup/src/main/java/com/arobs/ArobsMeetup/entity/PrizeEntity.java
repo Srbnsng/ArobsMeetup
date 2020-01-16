@@ -17,7 +17,7 @@ public class PrizeEntity {
     @Column(name = "pdescription")
     private String description;
     @Column(name = "pvalue")
-    private int values;
+    private int value;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true , mappedBy = "prize")
@@ -39,12 +39,12 @@ public class PrizeEntity {
         this.description = description;
     }
 
-    public int getValues() {
-        return values;
+    public int getValue() {
+        return value;
     }
 
-    public void setValues(int values) {
-        this.values = values;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public Set<AchievementHistoryEntity> getAchievementsHistories() {

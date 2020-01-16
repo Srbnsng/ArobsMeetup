@@ -13,6 +13,5 @@ public interface UserService {
     void alterUser(int id, UserDTO userDTO) throws Exception;
     UserDTO findUser(int id);
     List<UserDTO> findAllUsers();
-    void addPoints(int id, int points) throws Exception;
-    //List<UserDTO> getTopUserList();
+    List<UserDTO> getTopUserList();
 }

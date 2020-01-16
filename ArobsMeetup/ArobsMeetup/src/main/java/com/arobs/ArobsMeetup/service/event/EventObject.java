@@ -145,16 +145,17 @@ public class EventObject {
         UserEntity organiser = event.getProposer();
         System.out.println(organiser.getFull_name()+ " = " + organiser.getPoints());
         IRepository user_repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
-        if(event.getType().equals("Easy")){
+        if(event.getDifficulty().equals("Easy")){
             organiser.setPoints(organiser.getPoints()+AwardingConstants.EASY_LEVEL_POINTS);
         }
-        if(event.getType().equals("Medium")){
+        if(event.getDifficulty().equals("Medium")){
             organiser.setPoints(organiser.getPoints()+AwardingConstants.MEDIUM_LEVEL_POINTS);
         }
-        if(event.getType().equals("High")){
+        if(event.getDifficulty().equals("High")){
             organiser.setPoints(organiser.getPoints()+AwardingConstants.HIGH_LEVEL_POINTS);
         }
         user_repository.update(organiser);
+
         organiser = (UserEntity) user_repository.find(organiser.getId());
         System.out.println(organiser.getFull_name()+ " = " + organiser.getPoints());
     }

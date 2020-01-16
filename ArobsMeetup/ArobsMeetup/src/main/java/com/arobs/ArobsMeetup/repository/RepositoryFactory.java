@@ -14,6 +14,8 @@ public class RepositoryFactory {
     EventRepository eventRepository;
     @Autowired
     PrizeRepository prizeRepository;
+    @Autowired
+    AchievmentHistoryRepository achievmentHistoryRepository;
 
     public IRepository createRepository(String type){
 
@@ -28,6 +30,9 @@ public class RepositoryFactory {
         }
         if(type.equals("PRIZE")){
             return prizeRepository;
+        }
+        if(type.equals("ACHIEVEMENT")){
+            return achievmentHistoryRepository;
         }
 
 

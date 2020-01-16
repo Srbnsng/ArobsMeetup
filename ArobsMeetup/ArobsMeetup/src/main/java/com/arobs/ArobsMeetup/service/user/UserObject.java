@@ -8,7 +8,9 @@ import com.arobs.ArobsMeetup.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -19,6 +21,8 @@ public class UserObject {
     private RepositoryFactory factory;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     public void addUser(UserDTO userDTO) throws Exception {
 
@@ -83,38 +87,15 @@ public class UserObject {
         return null;
     }
 
-    public void addPoints(int id, int points) throws Exception {
+    public List<UserDTO> getTopUserList(){
         IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
-        UserEntity user = (UserEntity)repository.find(id);
-        if(user!=null){
-            user.setPoints(user.getPoints() + points);
-            repository.update(user);
+        List<UserEntity> users = repository.findAll();
+        if(users!=null){
+            users.sort(new UserComparator());
+            Collections.reverse(users);
+            return userMapper.mapAsList(users,UserDTO.class);
         }
-        else{
-            throw new Exception("User id not found! ");
-        }
-
+        return null;
     }
-
-//    public List<UserDTO> getTopUserList(){
-//        IRepository repository = factory.createRepository(RepositoryConstants.USER_REPOSITORY_TYPE);
-//        List<UserEntity> users = repository.findAll();
-//        if(users!=null) {
-//            UserEntity[] userArray =(UserEntity[]) users.toArray();
-//            int n = users.size();
-//            UserEntity temp;
-//            for(int i=0; i < n; i++){
-//                for(int j=1; j < (n-i); j++){
-//                    if(userArray[j-1].getPoints() > userArray[j].getPoints()){
-//                        temp = userArray[j-1];
-//                        userArray[j-1] =userArray[j];
-//                        userArray[j] = temp;
-//                    }
-//                }
-//            }
-//            return userMapper.mapAsList( Arrays.asList(userArray), UserDTO.class);
-//        }
-//       return null;
-//    }
 
 }

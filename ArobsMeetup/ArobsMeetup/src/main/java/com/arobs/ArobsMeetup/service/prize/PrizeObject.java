@@ -20,7 +20,7 @@ public class PrizeObject {
     public void addPrize(PrizeDTO prizeDTO){
         IRepository prize_repo = factory.createRepository(RepositoryConstants.PRIZE_REPOSITORY_TYPE);
         PrizeEntity prizeEntity = prizeMapper.map(prizeDTO,PrizeEntity.class);
-        prize_repo.add(prizeDTO);
+        prize_repo.add(prizeEntity);
 
     }
     public void alterPrize(int id , PrizeDTO prizeDTO) throws Exception {
@@ -28,7 +28,7 @@ public class PrizeObject {
         PrizeEntity prizeEntity = (PrizeEntity)prize_repo.find(id);
         if(prizeEntity != null){
             prizeEntity.setDescription(prizeDTO.getDescription());
-            prizeEntity.setValues(prizeDTO.getValue());
+            prizeEntity.setValue(prizeDTO.getValue());
             prize_repo.update(prizeEntity);
         }
         else{
